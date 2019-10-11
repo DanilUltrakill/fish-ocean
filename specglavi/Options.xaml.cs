@@ -30,7 +30,8 @@ namespace Fish_ocean
         {
             fast = fastfish.Text;
             stamina = staminafish.Text;
-            tango = tangoamount.Text;            
+            tango = tangoamount.Text;
+            this.Hide();
         }
     }
 }

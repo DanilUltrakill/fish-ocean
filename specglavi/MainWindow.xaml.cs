@@ -23,6 +23,14 @@ namespace Fish_ocean
         public MainWindow()
         {
             InitializeComponent();
+
+            ImageBrush ib = new ImageBrush();
+
+            //ib.AlignmentX = AlignmentX.Left;
+            //ib.Stretch = Stretch.None;
+            //ib.ViewboxUnits = BrushMappingMode.Absolute;
+            ib.ImageSource = new BitmapImage(new Uri(@"pack://application:,,,/pictures/ocean.jpg", UriKind.Absolute));
+            scene.Background = ib;
         }
 
 
@@ -104,6 +112,20 @@ namespace Fish_ocean
             int tango = int.Parse(options.tango);
             fish_spawn(fast, stamina);
             tango_spawn(tango);
+            fast = 0;
+            stamina = 0;
+            tango = 0;
+        }
+
+        private void Reset_Click(object sender, RoutedEventArgs e)
+        {
+            scene.Children.Clear();
+            options.Show();
+        }
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            options.Close();
         }
 
         private void Options_Click(object sender, RoutedEventArgs e)

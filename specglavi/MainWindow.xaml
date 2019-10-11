@@ -5,12 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Fish_ocean"
         mc:Ignorable="d"
-        Title="Fish's ocean" Height="750" Width="1000" WindowStartupLocation="Manual">
+        Title="Fish's ocean" Height="750" Width="1000" WindowStartupLocation="Manual" Closed="Window_Closed">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
         <Canvas x:Name="scene" HorizontalAlignment="Left" Height="676" VerticalAlignment="Top" Width="972" Margin="10,33,0,0"/>
         <Button x:Name="Start" Content="Start" HorizontalAlignment="Left" Height="21" Margin="10,7,0,0" VerticalAlignment="Top" Width="113" Click="Start_Click"/>
         <Button x:Name="Pause" Content="Pause" HorizontalAlignment="Left" Height="21" Margin="128,7,0,0" VerticalAlignment="Top" Width="106"/>
-        <Button x:Name="Stop" Content="Stop" HorizontalAlignment="Left" Height="21" Margin="234,7,0,0" VerticalAlignment="Top" Width="113"/>
+        <Button x:Name="Reset" Content="Reset" HorizontalAlignment="Left" Height="21" Margin="234,7,0,0" VerticalAlignment="Top" Width="113" Click="Reset_Click"/>
         <Button x:Name="Options" Content="Options" HorizontalAlignment="Left" Height="18" Margin="352,10,0,0" VerticalAlignment="Top" Width="127" Click="Options_Click"/>
 
     </Grid>

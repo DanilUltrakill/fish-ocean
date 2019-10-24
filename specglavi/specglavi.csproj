@@ -63,6 +63,9 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Class1.cs" />
+    <Compile Include="Class2.cs" />
+    <Compile Include="fishh.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -102,16 +105,16 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="pictures\XYU_3AJlUnA_1_2_3.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="pictures\roflanRibalo.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="pictures\12_TANGOS.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="pictures\ocean.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="pictures\12_TANGOS.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="pictures\roflanRibalo.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="pictures\FAST_AND_FURIOUS.gif" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

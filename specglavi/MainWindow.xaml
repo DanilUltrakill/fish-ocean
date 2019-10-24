@@ -15,6 +15,9 @@
         <Button x:Name="Pause" Content="Pause" HorizontalAlignment="Left" Height="21" Margin="128,7,0,0" VerticalAlignment="Top" Width="106"/>
         <Button x:Name="Reset" Content="Reset" HorizontalAlignment="Left" Height="21" Margin="234,7,0,0" VerticalAlignment="Top" Width="113" Click="Reset_Click"/>
         <Button x:Name="Options" Content="Options" HorizontalAlignment="Left" Height="18" Margin="352,10,0,0" VerticalAlignment="Top" Width="127" Click="Options_Click"/>
+        <Image Margin="1395,395,-451.4,275.8" Source="12 TANGOS.gif" Stretch="Fill"/>
+        <Image Margin="1395,395,-451.4,275.8" Source="roflanRibalo.gif" Stretch="Fill"/>
+        <Image Margin="1395,395,-451.4,275.8" Source="FAST_AND_FURIOUS.gif" Stretch="Fill"/>
 
     </Grid>
 </Window>

@@ -38,48 +38,130 @@ namespace Fish_ocean
 
         Random rnd = new Random();
         int cordx, cordy;
-       
+
         private void fish_spawn(int fast, int stamina)
         {
-            for (int i = fast; i > 0; i--)
+            int[,] oxy;
+            oxy = new int[18, 12];
+
+            int[,] sxy;
+            sxy = new int[18, 12];
+
+            int[,] fxy;
+            fxy = new int[18, 12];
+
+            for (int ox = 0; ox < 18; ox++)
             {
-                Rectangle fastfish = new Rectangle();
-
-                cordx = (rnd.Next(1, 18) * 50);
-                cordy = (rnd.Next(1, 12) * 50);
-
-                fastfish.Height = 25;
-                fastfish.Width = 50;
-                ImageBrush ib = new ImageBrush();
-                ib.AlignmentX = AlignmentX.Left;
-                ib.Stretch = Stretch.None;
-                ib.Viewbox = new Rect(0, 0, 50, 25);
-                ib.ViewboxUnits = BrushMappingMode.Absolute;
-                ib.ImageSource = new BitmapImage(new Uri(@"pack://application:,,,/pictures/XYU_3AJlUnA_1_2_3.png", UriKind.Absolute));
-                fastfish.Fill = ib;
-                fastfish.Margin = new Thickness(cordx, cordy, 0, 0);
-                scene.Children.Add(fastfish);
+                for (int oy = 0; oy < 12; oy++)
+                {
+                    oxy[ox, oy] = 0;
+                }
             }
+
+
+            //int[,] yy;
+            //yy = new int[fast + stamina, fast + stamina];
 
             for (int i = stamina; i > 0; i--)
             {
-                Rectangle staminafish = new Rectangle();
+                staminaf fish1 = new staminaf();
 
-                cordx = (rnd.Next(1, 18) * 50);
-                cordy = (rnd.Next(1, 12) * 50);
+                fish1.fx = (rnd.Next(1, 18) * 50);
+                fish1.fy = (rnd.Next(1, 12) * 50);
+                fish1.fishsr.Margin = new Thickness(fish1.fx, fish1.fy, 0, 0);
+                scene.Children.Add(fish1.fishsr);
+                
+                for (int xi = 0; xi < 18; xi++)
+                {
+                    for (int yi = 0; yi < 12; yi++)
+                    {
+                        if (xi == (fish1.fx / 50))
+                        {
+                            if (yi == (fish1.fy / 50))
+                            {
+                                oxy[xi, yi] = 1;
+                            }
+                        }
+                    }
+                }
 
-                staminafish.Height = 25;
-                staminafish.Width = 50;
-                ImageBrush ib = new ImageBrush();
-                ib.AlignmentX = AlignmentX.Left;
-                ib.Stretch = Stretch.None;
-                ib.Viewbox = new Rect(0, 0, 50, 25);
-                ib.ViewboxUnits = BrushMappingMode.Absolute;
-                ib.ImageSource = new BitmapImage(new Uri(@"pack://application:,,,/pictures/roflanRibalo.png", UriKind.Absolute));
-                staminafish.Fill = ib;
-                staminafish.Margin = new Thickness(cordx, cordy, 0, 0);
-                scene.Children.Add(staminafish);
+                //xx = fish1.fx;
+                //yy = fish1.fy;
+                //if (xx == fish1.fx)
+                //    fish1.fx = (rnd.Next(1, 18) * 50);
+                //if (yy == fish1.fy)
+                //    fish1.fy = (rnd.Next(1, 18) * 50);
             }
+
+            for (int i = fast; i > 0; i--)
+            {
+                fastf fish1 = new fastf();
+
+                fish1.fx = (rnd.Next(1, 18) * 50);
+                fish1.fy = (rnd.Next(1, 12) * 50);
+
+
+                for (int xi = 0; xi < 18; xi++)
+                {
+                    for (int yi = 0; yi < 12; yi++)
+                    {
+                        if (xi == (fish1.fx / 50))
+                        {
+                            if (yi == (fish1.fy / 50))
+                            {
+                                fxy[xi, yi] = 1;
+                            }
+                        }
+                        //if (xi != fxi)
+                        //{
+                        //    if (yi != fyi)
+                        //    {
+                        //        fish1.fishr.Margin = new Thickness(fish1.fx, fish1.fy, 0, 0);
+                        //        scene.Children.Add(fish1.fishr);
+                        //    }
+                        //}
+
+                    }
+                }
+
+                for (int xi = 0; xi < 18; xi++)
+                {
+                    for (int yi = 0; yi < 12; yi++)
+                    {
+                        if (oxy[xi, yi] != fxy[xi, yi])
+                        {
+                            fish1.fishfr.Margin = new Thickness(fish1.fx, fish1.fy, 0, 0);
+                            scene.Children.Add(fish1.fishfr);
+                        }
+                    }
+                }
+            }
+
+
+            //for (int xi = 0; xi < 18; xi++)
+            //{
+            //    for (int yi = 0; yi < 12; yi++)
+            //    {
+
+
+            //        if (xi == )
+            //        {
+            //            if (yi == (fish1.fy / 50))
+            //            {
+            //                fxy[xi, yi] = 1;
+            //            }
+            //        }
+            //    }
+            //}
+
+
+
+            //xx = fish1.fx;
+            //yy = fish1.fy;
+            //if (xx == fish1.fx)
+            //    fish1.fx = (rnd.Next(1, 18) * 50);
+            //if (yy == fish1.fy)
+            //    fish1.fy = (rnd.Next(1, 18) * 50);
         }
 
         private void tango_spawn(int amountoftango)
@@ -91,14 +173,14 @@ namespace Fish_ocean
                 cordx = (rnd.Next(1, 18) * 50);
                 cordy = (rnd.Next(1, 12) * 50);
 
-                tango.Height = 25;
+                tango.Height = 50;
                 tango.Width = 50;
                 ImageBrush ib = new ImageBrush();
                 ib.AlignmentX = AlignmentX.Left;
                 ib.Stretch = Stretch.None;
-                ib.Viewbox = new Rect(0, 0, 50, 25);
+                ib.Viewbox = new Rect(0, 0, 50, 50);
                 ib.ViewboxUnits = BrushMappingMode.Absolute;
-                ib.ImageSource = new BitmapImage(new Uri(@"pack://application:,,,/pictures/12_TANGOS.png", UriKind.Absolute));
+                ib.ImageSource = new BitmapImage(new Uri(@"pack://application:,,,/pictures/12_TANGOS.gif", UriKind.Absolute));
                 tango.Fill = ib;
                 tango.Margin = new Thickness(cordx, cordy, 0, 0);
                 scene.Children.Add(tango);

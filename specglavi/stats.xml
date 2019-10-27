@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<simulation>
+
+  <round id="1">
+    <FastFish>6</FastFish>
+    <StaminaFish>2</StaminaFish>
+  </round>
+
+  <round id="2">
+    <FastFish>5</FastFish>
+    <StaminaFish>3</StaminaFish>
+  </round>
+
+  <round id="3">
+    <FastFish>4</FastFish>
+    <StaminaFish>4</StaminaFish>
+  </round>
+
+</simulation>

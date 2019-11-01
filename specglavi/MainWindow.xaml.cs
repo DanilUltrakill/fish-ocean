@@ -23,7 +23,7 @@ namespace Fish_ocean
     {
         List<fastf> fastfish = new List<fastf>();
         List<staminaf> staminafish = new List<staminaf>();
-        //List<FastFish> fastFish = new List<FastFish>();
+        List<tango> tangos = new List<tango>();
 
         public MainWindow()
         {
@@ -38,6 +38,10 @@ namespace Fish_ocean
             scene.Background = ib;
         }
 
+        int[,] fxy = new int[19, 13];
+
+
+
         Options options = new Options();
 
         Random rnd = new Random();
@@ -45,126 +49,65 @@ namespace Fish_ocean
 
         private void fish_spawn(int fast, int stamina)
         {
-            int[,] oxy;
-            oxy = new int[18, 12];
-
-            int[,] sxy;
-            sxy = new int[18, 12];
-
-            int[,] fxy;
-            fxy = new int[18, 12];
-
-            for (int ox = 0; ox < 18; ox++)
-            {
-                for (int oy = 0; oy < 12; oy++)
-                {
-                    oxy[ox, oy] = 0;
-                }
-            }                        
-            
-            //int[,] yy;
-            //yy = new int[fast + stamina, fast + stamina];
 
             for (int i = stamina; i > 0; i--)
             {
                 staminaf fish1 = new staminaf();
 
-                fish1.fx = (rnd.Next(1, 18) * 50);
-                fish1.fy = (rnd.Next(1, 12) * 50);
-
+                fish1.fx = (rnd.Next(1, 19) * 50);
+                fish1.fy = (rnd.Next(1, 13) * 50);
+                proverka(fish1.fx, fish1.fy, out fish1.fx, out fish1.fy);
                 fish1.fishsr.Margin = new Thickness(fish1.fx, fish1.fy, 0, 0);
                 scene.Children.Add(fish1.fishsr);
                 staminafish.Add(fish1);
 
-                for (int xi = 0; xi < 18; xi++)
-                {
-                    for (int yi = 0; yi < 12; yi++)
-                    {
-                        if (xi == (fish1.fx / 50))
-                        {
-                            if (yi == (fish1.fy / 50))
-                            {
-                                oxy[xi, yi] = 1;
-                            }
-                        }
-                    }
-                }
-
-                //xx = fish1.fx;
-                //yy = fish1.fy;
-                //if (xx == fish1.fx)
-                //    fish1.fx = (rnd.Next(1, 18) * 50);
-                //if (yy == fish1.fy)
-                //    fish1.fy = (rnd.Next(1, 18) * 50);
             }
 
             for (int i = fast; i > 0; i--)
             {
                 fastf fish2 = new fastf();
 
-                fish2.fx = (rnd.Next(1, 18) * 50);
-                fish2.fy = (rnd.Next(1, 12) * 50);
-
+                fish2.fx = (rnd.Next(1, 19) * 50);
+                fish2.fy = (rnd.Next(1, 13) * 50);
+                proverka(fish2.fx, fish2.fy, out fish2.fx, out fish2.fy);
                 fish2.fishfr.Margin = new Thickness(fish2.fx, fish2.fy, 0, 0);
                 scene.Children.Add(fish2.fishfr);
                 fastfish.Add(fish2);
 
-                for (int xi = 0; xi < 18; xi++)
-                {
-                    for (int yi = 0; yi < 12; yi++)
-                    {
-                        if (xi == (fish2.fx / 50))
-                        {
-                            if (yi == (fish2.fy / 50))
-                            {
-                                fxy[xi, yi] = 1;
-                            }
-                        }
-                        //if (xi != fxi)
-                        //{
-                        //    if (yi != fyi)
-                        //    {
-                        //        fish1.fishr.Margin = new Thickness(fish1.fx, fish1.fy, 0, 0);
-                        //        scene.Children.Add(fish1.fishr);
-                        //    }
-                        //}
 
-                    }
-                }
-
-                for (int xi = 0; xi < 18; xi++)
-                {
-                    for (int yi = 0; yi < 12; yi++)
-                    {
-                        if (oxy[xi, yi] != fxy[xi, yi])
-                        {
-                            
-                        }
-                    }
-                }
             }
         }
+        public void proverka(int a, int b, out int x, out int y)
+        {
 
+
+            x = a / 50;
+            y = b / 50;
+            while (fxy[x, y] == 1)
+            {
+                x = rnd.Next(1, 19);
+                y = rnd.Next(1, 13);
+            }
+
+            if (fxy[x, y] == 0)
+            {
+                fxy[x, y] = 1;
+                x = x * 50;
+                y = y * 50;
+            }
+        }
         private void tango_spawn(int amountoftango)
         {
             for (int i = amountoftango; i > 0; i--)
             {
-                Rectangle tango = new Rectangle();
+                tango tango = new tango();
 
-                cordx = (rnd.Next(1, 18) * 50);
-                cordy = (rnd.Next(1, 12) * 50);
-
-                tango.Height = 25;
-                tango.Width = 50;
-                ImageBrush ib = new ImageBrush();
-                ib.AlignmentX = AlignmentX.Left;
-                ib.Stretch = Stretch.None;
-                ib.Viewbox = new Rect(0, 0, 50, 25);
-                ib.ViewboxUnits = BrushMappingMode.Absolute;
-                ib.ImageSource = new BitmapImage(new Uri(@"pack://application:,,,/pictures/12_TANGOS.png", UriKind.Absolute));
-                tango.Fill = ib;
-                tango.Margin = new Thickness(cordx, cordy, 0, 0);
-                scene.Children.Add(tango);
+                tango.tx = (rnd.Next(1, 19) * 50);
+                tango.ty = (rnd.Next(1, 13) * 50);
+                proverka(tango.tx, tango.ty, out tango.tx, out tango.ty);
+                tango.tangofr.Margin = new Thickness(tango.tx, tango.ty, 0, 0);
+                scene.Children.Add(tango.tangofr);
+                tangos.Add(tango);
             }
         }
 
@@ -182,10 +125,16 @@ namespace Fish_ocean
 
         private void Reset_Click(object sender, RoutedEventArgs e)
         {
+            for (int j = 0; j < 19; j++)
+            {
+                for (int i = 0; i < 13; i++)
+                {
+                    fxy[j, i] = 0;
+                }
+            }
             scene.Children.Clear();
             options.Show();
         }
-
         private void Window_Closed(object sender, EventArgs e)
         {
             options.Close();

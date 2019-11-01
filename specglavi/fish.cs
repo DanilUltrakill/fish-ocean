@@ -17,12 +17,11 @@ namespace specglavi
 {
     class fish
     {
-        public int fx, fy, fi;
+        public int fx, fy;
 
         public Rectangle fishsr = new Rectangle();
         public Rectangle fishfr = new Rectangle();
         public ImageBrush ibfishsr = new ImageBrush();
         public ImageBrush ibfishfr = new ImageBrush();
-
     }
 }

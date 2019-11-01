@@ -58,6 +58,7 @@
     </ApplicationDefinition>
     <Compile Include="fastf.cs" />
     <Compile Include="staminaf.cs" />
+    <Compile Include="tango.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -112,13 +113,13 @@
     <Resource Include="pictures\roflanRibalo.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="pictures\12_TANGOS.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="pictures\ocean.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="stats.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="pictures\12_TANGOS.gif" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

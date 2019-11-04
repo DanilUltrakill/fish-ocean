@@ -159,9 +159,10 @@ namespace Fish_ocean
             options.Show();
         }
 
-        double MinDistance = 1081.665;
+        double MinDistance1 = 1081.665;
         int tx, ty;
         double cur;
+        double MinDistance2 = 1081.665;
 
         private void FastRibki_Tick(object sender, EventArgs e)
         {
@@ -173,12 +174,13 @@ namespace Fish_ocean
 
             foreach (fastf ff in fastfish)
             {
+                ff.fishsr.RenderTransform = new TranslateTransform(ff.fx, ff.fy);
                 foreach (tango tango in tangos)
                 {
                     cur = Math.Sqrt(Math.Pow(ff.fx - tango.tx, 2) + Math.Pow(ff.fy - tango.ty, 2));
-                    if (cur<MinDistance)
+                    if (cur<MinDistance1)
                     {
-                        MinDistance = cur;
+                        MinDistance1 = cur;
                         tx = tango.tx;
                         ty = tango.ty;
                     }
@@ -188,10 +190,215 @@ namespace Fish_ocean
                         tangos.Remove(tango);
                         scene.Children.Remove(tango.tangofr);
                     }
+                    
                 }
 
                 //тут как рыбка будет двигаться к танго
+                if (ff.fy == ty)//rl
+                {
+                    if (ff.fx < tx)//r
+                    {
+                        while (ff.fx != tx)
+                        {
+                            ff.fx += 50;
+                        }
+                    }
 
+                    if (ff.fx > tx)//l
+                    {
+                        while (ff.fx != tx)
+                        {
+                            ff.fx -= 50;
+                        }
+                    }
+                }
+
+                if (ff.fx == tx)
+                {
+                    if (ff.fy < ty)//d
+                    {
+                        while (ff.fy != ty)
+                        {
+                            ff.fy += 50;
+                        }
+                    }
+
+                    if (ff.fx > tx)//u
+                    {
+                        while (ff.fx != tx)
+                        {
+                            ff.fy -= 50;
+                        }
+                    }
+                }
+
+                if (ff.fx < tx) //r
+                {
+                    if (ff.fy < ty)//d
+                    {
+                        if (ff.fx - ff.fy > tx - ty)//rightdown
+                        {
+                            while (ff.fx != (tx - ty + ff.fy))
+                            {
+                                ff.fx += 50;
+                            }
+
+                            while (ff.fx != tx)
+                            {
+                                ff.fx += 50;
+                                ff.fy += 50;
+                            }
+                        }
+
+                        if (ff.fx - ff.fy < tx - ty)//downright
+                        {
+                            while (ff.fy != (ff.fx - tx + ty))
+                            {
+                                ff.fy += 50;
+                            }
+
+                            while (ff.fy != ty)
+                            {
+                                ff.fx += 50;
+                                ff.fy += 50;
+                            }
+                        }
+                        if (ff.fx - ff.fy == tx - ty)//rddiag
+                        {
+                            while (ff.fy != ty)
+                            {
+                                ff.fx += 50;
+                                ff.fy += 50;
+                            }
+                        }
+                    }
+
+                    //////////////////////////////////////////////
+
+                    if (ff.fy < ty)//u
+                    {
+                        if (ff.fx + ff.fy < tx + ty)//rightup
+                        {
+                            while (ff.fx + ff.fy != (tx + ty - ff.fy))
+                            {
+                                ff.fx += 50;
+                            }
+
+                            while (ff.fx != tx)
+                            {
+                                ff.fx += 50;
+                                ff.fy -= 50;
+                            }
+                        }
+
+                        if (ff.fx + ff.fy > tx + ty)//upright
+                        {
+                            while (ff.fx + ff.fy != (tx + ty - ff.fx))
+                            {
+                                ff.fy -= 50;
+                            }
+
+                            while (ff.fy != ty)
+                            {
+                                ff.fx += 50;
+                                ff.fy -= 50;
+                            }
+                        }
+                        if (Math.Sqrt(Math.Pow(ff.fx - ff.fy, 2)) == Math.Sqrt(Math.Pow(tx - ty, 2)))//rdiag
+                        {
+                            while (ff.fy != ty)
+                            {
+                                ff.fx += 50;
+                                ff.fy -= 50;
+                            }
+                        }
+                    }
+                }
+
+                ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+                if (ff.fx > tx) //l
+                {
+                    if (ff.fy < ty)//d
+                    {
+                        if (ff.fx + ff.fy > tx + ty)//leftdown
+                        {
+                            while (ff.fx + ff.fy != (tx + ty - ff.fy))
+                            {
+                                ff.fx -= 50;
+                            }
+
+                            while (ff.fx != tx)
+                            {
+                                ff.fx -= 50;
+                                ff.fy += 50;
+                            }
+                        }
+
+                        if (ff.fx - ff.fy < tx - ty)//downleft
+                        {
+                            while (ff.fx + ff.fy != (tx + ty - ff.fx))
+                            {
+                                ff.fy += 50;
+                            }
+
+                            while (ff.fy != ty)
+                            {
+                                ff.fx -= 50;
+                                ff.fy += 50;
+                            }
+                        }
+                        if (ff.fx + ff.fy == tx + ty)//ldiag
+                        {
+                            while (ff.fy != ty)
+                            {
+                                ff.fx -= 50;
+                                ff.fy += 50;
+                            }
+                        }
+                    }
+
+                    //////////////////////////////////////////////
+
+                    if (ff.fy > ty)//u
+                    {
+                        if (ff.fx - ff.fy > tx - ty)//leftup
+                        {
+                            while (ff.fx != (tx - ty + ff.fy))
+                            {
+                                ff.fx -= 50;
+                            }
+
+                            while (ff.fx != tx)
+                            {
+                                ff.fx -= 50;
+                                ff.fy -= 50;
+                            }
+                        }
+
+                        if (ff.fx - ff.fy < tx - ty)//upleft
+                        {
+                            while (ff.fy != (ff.fx - tx +ty))
+                            {
+                                ff.fy -= 50;
+                            }
+
+                            while (ff.fy != ty)
+                            {
+                                ff.fx += 50;
+                                ff.fy -= 50;
+                            }
+                        }
+                        if (ff.fx - ff.fy == tx - ty)//rddiag
+                        {
+                            while (ff.fy != ty)
+                            {
+                                ff.fx -= 50;
+                                ff.fy -= 50;
+                            }
+                        }
+                    }
+                }
             }
         }
 
@@ -203,14 +410,16 @@ namespace Fish_ocean
                 StaminaRibki.Stop();
             }
 
-            foreach (fastf sf in fastfish)
+            foreach (staminaf sf in staminafish)
             {
+                sf.fishsr.RenderTransform = new TranslateTransform(sf.fx, sf.fy);
+                //sf.fishsr = new TranslateTransform(sf.fx, sf.fy);
                 foreach (tango tango in tangos)
                 {
                     cur = Math.Sqrt(Math.Pow(sf.fx - tango.tx, 2) + Math.Pow(sf.fy - tango.ty, 2));
-                    if (cur < MinDistance)
+                    if (cur < MinDistance2)
                     {
-                        MinDistance = cur;
+                        MinDistance2 = cur;
                         tx = tango.tx;
                         ty = tango.ty;
                     }
@@ -220,11 +429,218 @@ namespace Fish_ocean
                         tangos.Remove(tango);
                         scene.Children.Remove(tango.tangofr);
                     }
+
+                    //тут как рыбка будет двигаться к танго
+                    
                 }
 
-                //тут как рыбка будет двигаться к танго
+                if (sf.fy == ty)//rl
+                {
+                    if (sf.fx < tx)//r
+                    {
+                        while (sf.fx != tx)
+                        {
+                            sf.fx += 50;
+                        }
+                    }
 
+                    if (sf.fx > tx)//l
+                    {
+                        while (sf.fx != tx)
+                        {
+                            sf.fx -= 50;
+                        }
+                    }
+                }
+
+                if (sf.fx == tx)
+                {
+                    if (sf.fy < ty)//d
+                    {
+                        while (sf.fx != tx)
+                        {
+                            sf.fy += 50;
+                        }
+                    }
+
+                    if (sf.fx > tx)//u
+                    {
+                        while (sf.fx != tx)
+                        {
+                            sf.fy -= 50;
+                        }
+                    }
+                }
+
+                if (sf.fx < tx) //r
+                {
+                    if (sf.fy < ty)//d
+                    {
+                        if (sf.fx - sf.fy > tx - ty)//rightdown
+                        {
+                            while (sf.fx != (tx - ty))
+                            {
+                                sf.fx += 50;
+                            }
+
+                            while (sf.fx != tx)
+                            {
+                                sf.fx += 50;
+                                sf.fy += 50;
+                            }
+                        }
+
+                        if (sf.fx - sf.fy < tx - ty)//downright
+                        {
+                            while (sf.fy != (ty - tx))
+                            {
+                                sf.fy += 50;
+                            }
+
+                            while (sf.fy != ty)
+                            {
+                                sf.fx += 50;
+                                sf.fy += 50;
+                            }
+                        }
+                        if (sf.fx - sf.fy == tx - ty)//rddiag
+                        {
+                            while (sf.fy != ty)
+                            {
+                                sf.fx += 50;
+                                sf.fy += 50;
+                            }
+                        }
+                    }
+
+                    //////////////////////////////////////////////
+
+                    if (sf.fy > ty)//u
+                    {
+                        if (sf.fx + sf.fy < tx + ty)//rightup
+                        {
+                            while (sf.fx + sf.fy != (tx - ty))
+                            {
+                                sf.fx += 50;
+                            }
+
+                            while (sf.fx != tx)
+                            {
+                                sf.fx += 50;
+                                sf.fy -= 50;
+                            }
+                        }
+
+                        if (sf.fx + sf.fy > tx + ty)//upright
+                        {
+                            while (sf.fx + sf.fy != (ty - tx))
+                            {
+                                sf.fy -= 50;
+                            }
+
+                            while (sf.fy != ty)
+                            {
+                                sf.fx += 50;
+                                sf.fy -= 50;
+                            }
+                        }
+                        if (Math.Sqrt(Math.Pow(sf.fx - sf.fy, 2)) == Math.Sqrt(Math.Pow(tx - ty, 2)))//rdiag
+                        {
+                            while (sf.fy != ty)
+                            {
+                                sf.fx += 50;
+                                sf.fy -= 50;
+                            }
+                        }
+                    }
+                }
+
+                ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+                if (sf.fx > tx) //l
+                {
+                    if (sf.fy < ty)//d
+                    {
+                        if (sf.fx + sf.fy > tx + ty)//leftdown
+                        {
+                            while (sf.fx + sf.fy != tx + ty)
+                            {
+                                sf.fx -= 50;
+                            }
+
+                            while (sf.fx != tx)
+                            {
+                                sf.fx -= 50;
+                                sf.fy += 50;
+                            }
+                        }
+
+                        if (sf.fx - sf.fy < tx - ty)//downleft
+                        {
+                            while (sf.fx + sf.fy != ty + tx)
+                            {
+                                sf.fy += 50;
+                            }
+
+                            while (sf.fy != ty)
+                            {
+                                sf.fx -= 50;
+                                sf.fy += 50;
+                            }
+                        }
+                        if (sf.fx + sf.fy == tx + ty)//ldiag
+                        {
+                            while (sf.fy != ty)
+                            {
+                                sf.fx -= 50;
+                                sf.fy += 50;
+                            }
+                        }
+                    }
+
+                    //////////////////////////////////////////////
+
+                    if (sf.fy < ty)//u
+                    {
+                        if (sf.fx - sf.fy > tx - ty)//leftup
+                        {
+                            while (sf.fx != (ty - tx))
+                            {
+                                sf.fx -= 50;
+                            }
+
+                            while (sf.fx != tx)
+                            {
+                                sf.fx -= 50;
+                                sf.fy -= 50;
+                            }
+                        }
+
+                        if (sf.fx - sf.fy < tx - ty)//upleft
+                        {
+                            while (sf.fy != (tx - ty))
+                            {
+                                sf.fy -= 50;
+                            }
+
+                            while (sf.fy != ty)
+                            {
+                                sf.fx += 50;
+                                sf.fy -= 50;
+                            }
+                        }
+                        if (sf.fx - sf.fy == tx - ty)//rddiag
+                        {
+                            while (sf.fy != ty)
+                            {
+                                sf.fx -= 50;
+                                sf.fy -= 50;
+                            }
+                        }
+                    }
+                }
             }
+            
         }
 
     }

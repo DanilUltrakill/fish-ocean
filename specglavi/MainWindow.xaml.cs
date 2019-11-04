@@ -25,6 +25,9 @@ namespace Fish_ocean
         List<staminaf> staminafish = new List<staminaf>();
         List<tango> tangos = new List<tango>();
 
+        System.Windows.Threading.DispatcherTimer FastRibki;
+        System.Windows.Threading.DispatcherTimer StaminaRibki;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -121,6 +124,17 @@ namespace Fish_ocean
             fast = 0;
             stamina = 0;
             tango = 0;
+
+            FastRibki = new System.Windows.Threading.DispatcherTimer();
+            FastRibki.Tick += new EventHandler(FastRibki_Tick);
+            FastRibki.Interval = new TimeSpan(0,0,0,1);
+
+            StaminaRibki = new System.Windows.Threading.DispatcherTimer();
+            StaminaRibki.Tick += new EventHandler(StaminaRibki_Tick);
+            StaminaRibki.Interval = new TimeSpan(0, 0, 0, 2);
+
+            FastRibki.Start();
+            StaminaRibki.Start();
         }
 
         private void Reset_Click(object sender, RoutedEventArgs e)
@@ -143,6 +157,74 @@ namespace Fish_ocean
         private void Options_Click(object sender, RoutedEventArgs e)
         {
             options.Show();
+        }
+
+        double MinDistance = 1081.665;
+        int tx, ty;
+        double cur;
+
+        private void FastRibki_Tick(object sender, EventArgs e)
+        {
+            if(!tangos.Any())
+            {
+                FastRibki.Stop();
+                StaminaRibki.Stop();
+            }
+
+            foreach (fastf ff in fastfish)
+            {
+                foreach (tango tango in tangos)
+                {
+                    cur = Math.Sqrt(Math.Pow(ff.fx - tango.tx, 2) + Math.Pow(ff.fy - tango.ty, 2));
+                    if (cur<MinDistance)
+                    {
+                        MinDistance = cur;
+                        tx = tango.tx;
+                        ty = tango.ty;
+                    }
+
+                    if (ff.fx==tx & ff.fy==ty)
+                    {
+                        tangos.Remove(tango);
+                        scene.Children.Remove(tango.tangofr);
+                    }
+                }
+
+                //тут как рыбка будет двигаться к танго
+
+            }
+        }
+
+        private void StaminaRibki_Tick(object sender, EventArgs e)
+        {
+            if (!tangos.Any())
+            {
+                FastRibki.Stop();
+                StaminaRibki.Stop();
+            }
+
+            foreach (fastf sf in fastfish)
+            {
+                foreach (tango tango in tangos)
+                {
+                    cur = Math.Sqrt(Math.Pow(sf.fx - tango.tx, 2) + Math.Pow(sf.fy - tango.ty, 2));
+                    if (cur < MinDistance)
+                    {
+                        MinDistance = cur;
+                        tx = tango.tx;
+                        ty = tango.ty;
+                    }
+
+                    if (sf.fx == tx & sf.fy == ty)
+                    {
+                        tangos.Remove(tango);
+                        scene.Children.Remove(tango.tangofr);
+                    }
+                }
+
+                //тут как рыбка будет двигаться к танго
+
+            }
         }
 
     }

@@ -186,7 +186,17 @@ namespace Fish_ocean
                         ty = tango.ty;
                         tangofast = curtango;
                     }
+
+                    if (ff.fx == tango.tx & ff.fy == tango.ty)
+                    {
+                        scene.Children.Remove(tango.tangofr);
+                    }
                 }
+
+                if (ff.fx == tx & ff.fy == ty)
+                {
+                    tangos.RemoveAt(tangofast);
+                }                
 
                 //тут как рыбка будет двигаться к танго
                 if (ff.fy == ty)//rl
@@ -218,9 +228,9 @@ namespace Fish_ocean
                         }
                     }
 
-                    if (ff.fx > tx)//u
+                    if (ff.fy > ty)//u
                     {
-                        if (ff.fx != tx)
+                        if (ff.fy != ty)
                         {
                             ff.fy -= 50;
                         }
@@ -231,28 +241,28 @@ namespace Fish_ocean
                 {
                     if (ff.fy < ty)//d
                     {
-                        if (ff.fx - ff.fy > tx - ty)//rightdown
+                        if (ff.fx - ff.fy < tx - ty)//rightdown
                         {
                             if (ff.fx != (tx - ty + ff.fy))
                             {
                                 ff.fx += 50;
                             }
 
-                            if (ff.fx != tx)
+                            if ((ff.fx == (tx - ty + ff.fy)) && ff.fx != tx)
                             {
                                 ff.fx += 50;
                                 ff.fy += 50;
                             }
                         }
 
-                        if (ff.fx - ff.fy < tx - ty)//downright
+                        if (ff.fx - ff.fy > tx - ty)//downright
                         {
                             if (ff.fy != (ff.fx - tx + ty))
                             {
                                 ff.fy += 50;
                             }
 
-                            if (ff.fy != ty)
+                            if ((ff.fy != (ff.fx - tx + ty)) && ff.fy != ty)
                             {
                                 ff.fx += 50;
                                 ff.fy += 50;
@@ -270,7 +280,7 @@ namespace Fish_ocean
 
                     //////////////////////////////////////////////
 
-                    if (ff.fy < ty)//u
+                    if (ff.fy > ty)//u
                     {
                         if (ff.fx + ff.fy < tx + ty)//rightup
                         {
@@ -279,7 +289,7 @@ namespace Fish_ocean
                                 ff.fx += 50;
                             }
 
-                            if (ff.fx != tx)
+                            if ((ff.fx + ff.fy == (tx + ty - ff.fy))&&ff.fx != tx)
                             {
                                 ff.fx += 50;
                                 ff.fy -= 50;
@@ -293,13 +303,13 @@ namespace Fish_ocean
                                 ff.fy -= 50;
                             }
 
-                            if (ff.fy != ty)
+                            if ((ff.fx + ff.fy == (tx + ty - ff.fx)) &&ff.fy != ty)
                             {
                                 ff.fx += 50;
                                 ff.fy -= 50;
                             }
                         }
-                        if (Math.Sqrt(Math.Pow(ff.fx - ff.fy, 2)) == Math.Sqrt(Math.Pow(tx - ty, 2)))//rdiag
+                        if (Math.Sqrt(Math.Pow(ff.fx + ff.fy, 2)) == Math.Sqrt(Math.Pow(tx + ty, 2)))//rdiag
                         {
                             if (ff.fy != ty)
                             {
@@ -321,34 +331,26 @@ namespace Fish_ocean
                             if (ff.fx + ff.fy != (tx + ty - ff.fy))
                             {
                                 ff.fx -= 50;
-                                ff.fishfr.RenderTransform = new TranslateTransform(ff.fx, ff.fy);
-                                break;
                             }
 
-                            if (ff.fx != tx)
+                            if ((ff.fx + ff.fy == (tx + ty - ff.fy))&&ff.fx != tx)
                             {
                                 ff.fx -= 50;
                                 ff.fy += 50;
-                                ff.fishfr.RenderTransform = new TranslateTransform(ff.fx, ff.fy);
-                                break;
                             }
                         }
 
-                        if (ff.fx - ff.fy < tx - ty)//downleft
+                        if (ff.fx + ff.fy < tx + ty)//downleft
                         {
                             if (ff.fx + ff.fy != (tx + ty - ff.fx))
                             {
                                 ff.fy += 50;
-                                ff.fishfr.RenderTransform = new TranslateTransform(ff.fx, ff.fy);
-                                break;
                             }
 
-                            if (ff.fy != ty)
+                            if ((ff.fx + ff.fy == (tx + ty - ff.fx))&&ff.fy != ty)
                             {
                                 ff.fx -= 50;
                                 ff.fy += 50;
-                                ff.fishfr.RenderTransform = new TranslateTransform(ff.fx, ff.fy);
-                                break;
                             }
                         }
                         if (ff.fx + ff.fy == tx + ty)//ldiag
@@ -357,8 +359,6 @@ namespace Fish_ocean
                             {
                                 ff.fx -= 50;
                                 ff.fy += 50;
-                                ff.fishfr.RenderTransform = new TranslateTransform(ff.fx, ff.fy);
-                                break;
                             }
                         }
                     }
@@ -367,39 +367,31 @@ namespace Fish_ocean
 
                     if (ff.fy > ty)//u
                     {
-                        if (ff.fx - ff.fy > tx - ty)//leftup
+                        if (ff.fx - ff.fy < tx - ty)//leftup
                         {
                             if (ff.fx != (tx - ty + ff.fy))
                             {
                                 ff.fx -= 50;
-                                ff.fishfr.RenderTransform = new TranslateTransform(ff.fx, ff.fy);
-                                break;
                             }
 
-                            if (ff.fx != tx)
+                            if ((ff.fx == (tx - ty + ff.fy)) &&ff.fx != tx)
                             {
                                 ff.fx -= 50;
                                 ff.fy -= 50;
-                                ff.fishfr.RenderTransform = new TranslateTransform(ff.fx, ff.fy);
-                                break;
                             }
                         }
 
-                        if (ff.fx - ff.fy < tx - ty)//upleft
+                        if (ff.fx - ff.fy > tx - ty)//upleft
                         {
-                            if (ff.fy != (ff.fx - tx +ty))
+                            if (ff.fx != (tx - ty + ff.fy))
                             {
                                 ff.fy -= 50;
-                                ff.fishfr.RenderTransform = new TranslateTransform(ff.fx, ff.fy);
-                                break;
                             }
 
-                            if (ff.fy != ty)
+                            if ((ff.fx == (tx - ty + ff.fy)) &&ff.fy != ty)
                             {
                                 ff.fx += 50;
                                 ff.fy -= 50;
-                                ff.fishfr.RenderTransform = new TranslateTransform(ff.fx, ff.fy);
-                                break;
                             }
                         }
                         if (ff.fx - ff.fy == tx - ty)//rddiag
@@ -408,8 +400,6 @@ namespace Fish_ocean
                             {
                                 ff.fx -= 50;
                                 ff.fy -= 50;
-                                ff.fishfr.RenderTransform = new TranslateTransform(ff.fx, ff.fy);
-                                break;
                             }
                         }
                     }
@@ -419,11 +409,11 @@ namespace Fish_ocean
                 ff.fishfr.Margin = new Thickness(ff.fx, ff.fy, 0, 0);
                 scene.Children.Add(ff.fishfr);
 
-                if (ff.fx == tx & ff.fy == ty)
-                {
-                    scene.Children.Remove(ff.tangofr);
-                    tangos.RemoveAt(tangofast);
-                }
+                //if (ff.fx == tx & ff.fy == ty)
+                //{
+                //    scene.Children.Remove(ff.tangofr);
+                //    tangos.RemoveAt(tangofast);
+                //}
             }
         }
 
@@ -450,11 +440,18 @@ namespace Fish_ocean
                         tx = tango.tx;
                         ty = tango.ty;
                         tangostam = curtango;
-                    }                    
+                    }
 
-                    //тут как рыбка будет двигаться к танго
-                    
+                    if (sf.fx == tango.tx & sf.fy == tango.ty)
+                    {
+                        scene.Children.Remove(tango.tangofr);
+                    }
                 }
+
+                if (sf.fx == tx & sf.fy == ty)
+                {
+                    tangos.RemoveAt(tangostam);
+                }                
 
                 if (sf.fy == ty)//rl
                 {
@@ -479,15 +476,15 @@ namespace Fish_ocean
                 {
                     if (sf.fy < ty)//d
                     {
-                        if (sf.fx != tx)
+                        if (sf.fy != ty)
                         {
                             sf.fy += 50;
                         }
                     }
 
-                    if (sf.fx > tx)//u
+                    if (sf.fy > ty)//u
                     {
-                        if (sf.fx != tx)
+                        if (sf.fy != ty)
                         {
                             sf.fy -= 50;
                         }
@@ -498,28 +495,28 @@ namespace Fish_ocean
                 {
                     if (sf.fy < ty)//d
                     {
-                        if (sf.fx - sf.fy > tx - ty)//rightdown
+                        if (sf.fx - sf.fy < tx - ty)//rightdown
                         {
                             if (sf.fx != (tx - ty))
                             {
                                 sf.fx += 50;
                             }
 
-                            if (sf.fx != tx)
+                            if ((sf.fx == (tx - ty))&&sf.fx != tx)
                             {
                                 sf.fx += 50;
                                 sf.fy += 50;
                             }
                         }
 
-                        if (sf.fx - sf.fy < tx - ty)//downright
+                        if (sf.fx - sf.fy > tx - ty)//downright
                         {
                             if (sf.fy != (ty - tx))
                             {
                                 sf.fy += 50;
                             }
 
-                            if (sf.fy != ty)
+                            if ((sf.fy == (ty - tx)) &&sf.fy != ty)
                             {
                                 sf.fx += 50;
                                 sf.fy += 50;
@@ -546,7 +543,7 @@ namespace Fish_ocean
                                 sf.fx += 50;
                             }
 
-                            if (sf.fx != tx)
+                            if ((sf.fx + sf.fy == (tx - ty))&&sf.fx != tx)
                             {
                                 sf.fx += 50;
                                 sf.fy -= 50;
@@ -560,13 +557,13 @@ namespace Fish_ocean
                                 sf.fy -= 50;
                             }
 
-                            if (sf.fy != ty)
+                            if ((sf.fx + sf.fy == (ty - tx))&&sf.fy != ty)
                             {
                                 sf.fx += 50;
                                 sf.fy -= 50;
                             }
                         }
-                        if (Math.Sqrt(Math.Pow(sf.fx - sf.fy, 2)) == Math.Sqrt(Math.Pow(tx - ty, 2)))//rdiag
+                        if (Math.Sqrt(Math.Pow(sf.fx + sf.fy, 2)) == Math.Sqrt(Math.Pow(tx + ty, 2)))//rdiag
                         {
                             if (sf.fy != ty)
                             {
@@ -590,21 +587,21 @@ namespace Fish_ocean
                                 sf.fx -= 50;
                             }
 
-                            if (sf.fx != tx)
+                            if ((sf.fx + sf.fy == tx + ty)&&sf.fx != tx)
                             {
                                 sf.fx -= 50;
                                 sf.fy += 50;
                             }
                         }
 
-                        if (sf.fx - sf.fy < tx - ty)//downleft
+                        if (sf.fx + sf.fy < tx + ty)//downleft
                         {
                             if (sf.fx + sf.fy != ty + tx)
                             {
                                 sf.fy += 50;
                             }
 
-                            if (sf.fy != ty)
+                            if ((sf.fx + sf.fy == ty + tx)&&sf.fy != ty)
                             {
                                 sf.fx -= 50;
                                 sf.fy += 50;
@@ -622,30 +619,30 @@ namespace Fish_ocean
 
                     //////////////////////////////////////////////
 
-                    if (sf.fy < ty)//u
+                    if (sf.fy > ty)//u
                     {
-                        if (sf.fx - sf.fy > tx - ty)//leftup
+                        if (sf.fx - sf.fy < tx - ty)//leftup
                         {
                             if (sf.fx != (ty - tx))
                             {
                                 sf.fx -= 50;
                             }
 
-                            if (sf.fx != tx)
+                            if ((sf.fx == (ty - tx))&&sf.fx != tx)
                             {
                                 sf.fx -= 50;
                                 sf.fy -= 50;
                             }
                         }
 
-                        if (sf.fx - sf.fy < tx - ty)//upleft
+                        if (sf.fx - sf.fy > tx - ty)//upleft
                         {
                             if (sf.fy != (tx - ty))
                             {
                                 sf.fy -= 50;
                             }
 
-                            if (sf.fy != ty)
+                            if ((sf.fy != (tx - ty))&&sf.fy != ty)
                             {
                                 sf.fx += 50;
                                 sf.fy -= 50;
@@ -667,11 +664,11 @@ namespace Fish_ocean
                 sf.fishsr.Margin = new Thickness(sf.fx, sf.fy, 0, 0);
                 scene.Children.Add(sf.fishsr);
 
-                if (sf.fx == tx & sf.fy == ty)
-                {
-                    tangos.RemoveAt(tangostam);
-                    scene.Children.Remove(sf.tangofr);
-                }
+                //if (sf.fx == tx & sf.fy == ty)
+                //{
+                //    tangos.RemoveAt(tangostam);
+                //    scene.Children.Remove(sf.tangofr);
+                //}
             }
             
         }

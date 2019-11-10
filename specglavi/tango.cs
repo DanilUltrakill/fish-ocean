@@ -15,11 +15,9 @@ using System.Windows.Shapes;
 
 namespace specglavi
 {
-    class tango
+    class tango : fish
     {
-        public int tx, ty;
-        public Rectangle tangofr = new Rectangle();
-        public ImageBrush ibtangofr = new ImageBrush();     
+        public int tx, ty;  
         
         public tango()
         {

@@ -15,7 +15,7 @@ using System.Windows.Shapes;
 
 namespace specglavi
 {
-    class staminaf : fish
+    class staminaf : tango
     {
         public staminaf()
         {

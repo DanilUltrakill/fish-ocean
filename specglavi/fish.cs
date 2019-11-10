@@ -23,5 +23,7 @@ namespace specglavi
         public Rectangle fishfr = new Rectangle();
         public ImageBrush ibfishsr = new ImageBrush();
         public ImageBrush ibfishfr = new ImageBrush();
+        public Rectangle tangofr = new Rectangle();
+        public ImageBrush ibtangofr = new ImageBrush();
     }
 }

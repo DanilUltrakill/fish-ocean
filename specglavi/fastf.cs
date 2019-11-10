@@ -15,7 +15,7 @@ using System.Windows.Shapes;
 
 namespace specglavi
 {
-    class fastf : fish
+    class fastf : tango
     {
         public fastf()
         {

@@ -464,7 +464,7 @@ namespace Fish_ocean
 
                             if ((ff.fx == (tx - ty + ff.fy)) &&ff.fy != ty)
                             {
-                                ff.fx += 50;
+                                ff.fx -= 50;
                                 ff.fy -= 50;
                             }
                         }
@@ -729,7 +729,7 @@ namespace Fish_ocean
 
                             if ((sf.fy != (tx - ty))&&sf.fy != ty)
                             {
-                                sf.fx += 50;
+                                sf.fx -= 50;
                                 sf.fy -= 50;
                             }
                         }

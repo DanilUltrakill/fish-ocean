@@ -1,19 +1,23 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <simulation>
-
-  <round id="1">
-    <FastFish>6</FastFish>
-    <StaminaFish>2</StaminaFish>
-  </round>
-
-  <round id="2">
-    <FastFish>5</FastFish>
-    <StaminaFish>3</StaminaFish>
-  </round>
-
-  <round id="3">
-    <FastFish>4</FastFish>
-    <StaminaFish>4</StaminaFish>
-  </round>
-
+  <Round id="0">
+    <Fast_Fish>0</Fast_Fish>
+    <Stamina_Fish>0</Stamina_Fish>
+  </Round>
+  <Round id="1">
+    <Fast_Fish>2</Fast_Fish>
+    <Stamina_Fish>2</Stamina_Fish>
+  </Round>
+  <Round id="2">
+    <Fast_Fish>0</Fast_Fish>
+    <Stamina_Fish>2</Stamina_Fish>
+  </Round>
+  <Round id="0">
+    <Fast_Fish>0</Fast_Fish>
+    <Stamina_Fish>0</Stamina_Fish>
+  </Round>
+  <Round id="0">
+    <Fast_Fish>2</Fast_Fish>
+    <Stamina_Fish>2</Stamina_Fish>
+  </Round>
 </simulation>

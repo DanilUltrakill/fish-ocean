@@ -13,6 +13,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Xml;
+using System.Xml.Linq;
+using OxyPlot;
+using OxyPlot.Series;
 
 namespace Fish_ocean
 {
@@ -28,6 +32,7 @@ namespace Fish_ocean
 
         System.Windows.Threading.DispatcherTimer FastRibki;
         System.Windows.Threading.DispatcherTimer StaminaRibki;
+        System.Windows.Threading.DispatcherTimer Rounding;
 
         public MainWindow()
         {
@@ -115,16 +120,20 @@ namespace Fish_ocean
         }
 
         private void Start_Click(object sender, RoutedEventArgs e)
-        {
-
+        {            
             int fast = int.Parse(options.fast);
             int stamina = int.Parse(options.stamina);
             int tango = int.Parse(options.tango);
+
+
+            chart.Visibility = Visibility.Hidden;
+            mainfield.Visibility = Visibility.Visible;
 
             if (round == 0)
             {
                 fish_spawn(fast, stamina);
                 tango_spawn(tango);
+
             }
             else
             {
@@ -186,7 +195,35 @@ namespace Fish_ocean
                 //fish_spawn(f, s);
                 tango_spawn(tango);
             }
+
+            XmlDocument xDoc = new XmlDocument();
+            xDoc.Load("C:\\Users\\user\\source\\repos\\specglavi\\specglavi\\stats.xml");
+            XmlElement xRoot = xDoc.DocumentElement;
+            XmlElement OptionsElem = xDoc.CreateElement("Round");
+            XmlAttribute numAttr = xDoc.CreateAttribute("id");
+
+            XmlElement CYF = xDoc.CreateElement("Fast_Fish");
+            XmlElement CPF = xDoc.CreateElement("Stamina_Fish");
+
+            XmlText roundNum = xDoc.CreateTextNode(round.ToString());
+            XmlText CYFn = xDoc.CreateTextNode(fastfish.Count().ToString());
+            XmlText CPFn = xDoc.CreateTextNode(staminafish.Count().ToString());
+
+            //Creating nodes
+            numAttr.AppendChild(roundNum);
+            CYF.AppendChild(CYFn);
+            CPF.AppendChild(CPFn);
+            OptionsElem.Attributes.Append(numAttr);
+            OptionsElem.AppendChild(CYF);
+            OptionsElem.AppendChild(CPF);
+            xRoot.AppendChild(OptionsElem);
+            xDoc.Save("C:\\Users\\user\\source\\repos\\specglavi\\specglavi\\stats.xml");
+
             round++;
+
+            Rounding = new System.Windows.Threading.DispatcherTimer();
+            Rounding.Tick += new EventHandler(Rounding_Tick);
+            Rounding.Interval = new TimeSpan(0, 0, 0, 1);
 
             FastRibki = new System.Windows.Threading.DispatcherTimer();
             FastRibki.Tick += new EventHandler(FastRibki_Tick);
@@ -196,6 +233,7 @@ namespace Fish_ocean
             StaminaRibki.Tick += new EventHandler(StaminaRibki_Tick);
             StaminaRibki.Interval = new TimeSpan(0, 0, 0, 2);
 
+            Rounding.Start();
             FastRibki.Start();
             StaminaRibki.Start();
         }
@@ -226,13 +264,27 @@ namespace Fish_ocean
         double cur;
         int tangofast, tangostam;
 
-        private void FastRibki_Tick(object sender, EventArgs e)
+        private void Rounding_Tick(object sender, EventArgs e)
         {
-            if(!tangos.Any())
+            if (!tangos.Any())
             {
                 FastRibki.Stop();
                 StaminaRibki.Stop();
+                chart.Visibility = Visibility.Visible;
+                mainfield.Visibility = Visibility.Hidden;
+                Rounding.Stop();
             }
+        }
+
+        private void FastRibki_Tick(object sender, EventArgs e)
+        {
+            //if(!tangos.Any())
+            //{
+            //    FastRibki.Stop();
+            //    StaminaRibki.Stop();
+            //    chart.Visibility = Visibility.Visible;
+            //    mainfield.Visibility = Visibility.Hidden;
+            //}
 
             int curfastfish = -1;
 
@@ -493,11 +545,11 @@ namespace Fish_ocean
 
         private void StaminaRibki_Tick(object sender, EventArgs e)
         {
-            if (!tangos.Any())
-            {
-                FastRibki.Stop();
-                StaminaRibki.Stop();
-            }
+            //if (!tangos.Any())
+            //{
+            //    FastRibki.Stop();
+            //    StaminaRibki.Stop();
+            //}
 
             int curstaminafish = -1;
 
@@ -757,216 +809,7 @@ namespace Fish_ocean
             }
             
         }        
-
-        //private void move(int fx,int fy, int tx, int ty)
-        //{
-        //    if (fy == ty)//rl
-        //    {
-        //        if (fx < tx)//r
-        //        {
-        //            if (fx != tx)
-        //            {
-        //                fx += 50;
-        //            }
-        //        }
-
-        //        if (fx > tx)//l
-        //        {
-        //            if (fx != tx)
-        //            {
-        //                fx -= 50;
-        //            }
-        //        }
-        //    }
-
-        //    if (fx == tx)
-        //    {
-        //        if (fy < ty)//d
-        //        {
-        //            if (fy != ty)
-        //            {
-        //                fy += 50;
-        //            }
-        //        }
-
-        //        if (fy > ty)//u
-        //        {
-        //            if (fy != ty)
-        //            {
-        //                fy -= 50;
-        //            }
-        //        }
-        //    }
-
-        //    if (fx < tx) //r
-        //    {
-        //        if (fy < ty)//d
-        //        {
-        //            if (fx - fy < tx - ty)//rightdown
-        //            {
-        //                if (fx != (tx - ty + fy))
-        //                {
-        //                    fx += 50;
-        //                }
-
-        //                if ((fx == (tx - ty + fy)) && fx != tx)
-        //                {
-        //                    fx += 50;
-        //                    fy += 50;
-        //                }
-        //            }
-
-        //            if (fx - fy > tx - ty)//downright
-        //            {
-        //                if (fy != (fx - tx + ty))
-        //                {
-        //                    fy += 50;
-        //                }
-
-        //                if ((fy != (fx - tx + ty)) && fy != ty)
-        //                {
-        //                    fx += 50;
-        //                    fy += 50;
-        //                }
-        //            }
-        //            if (fx - fy == tx - ty)//rddiag
-        //            {
-        //                if (fy != ty)
-        //                {
-        //                    fx += 50;
-        //                    fy += 50;
-        //                }
-        //            }
-        //        }
-
-        //        //////////////////////////////////////////////
-
-        //        if (fy > ty)//u
-        //        {
-        //            if (fx + fy < tx + ty)//rightup
-        //            {
-        //                if (fx + fy != (tx + ty - fy))
-        //                {
-        //                    fx += 50;
-        //                }
-
-        //                if ((fx + fy == (tx + ty - fy)) && fx != tx)
-        //                {
-        //                    fx += 50;
-        //                    fy -= 50;
-        //                }
-        //            }
-
-        //            if (fx + fy > tx + ty)//upright
-        //            {
-        //                if (fx + fy != (tx + ty - fx))
-        //                {
-        //                    fy -= 50;
-        //                }
-
-        //                if ((fx + fy == (tx + ty - fx)) && fy != ty)
-        //                {
-        //                    fx += 50;
-        //                    fy -= 50;
-        //                }
-        //            }
-        //            if (Math.Sqrt(Math.Pow(fx + fy, 2)) == Math.Sqrt(Math.Pow(tx + ty, 2)))//rdiag
-        //            {
-        //                if (fy != ty)
-        //                {
-        //                    fx += 50;
-        //                    fy -= 50;
-        //                }
-        //            }
-        //        }
-        //    }
-
-        //    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-        //    if (fx > tx) //l
-        //    {
-        //        if (fy < ty)//d
-        //        {
-        //            if (fx + fy > tx + ty)//leftdown
-        //            {
-        //                if (fx + fy != (tx + ty - fy))
-        //                {
-        //                    fx -= 50;
-        //                }
-
-        //                if ((fx + fy == (tx + ty - fy)) && fx != tx)
-        //                {
-        //                    fx -= 50;
-        //                    fy += 50;
-        //                }
-        //            }
-
-        //            if (fx + fy < tx + ty)//downleft
-        //            {
-        //                if (fx + fy != (tx + ty - fx))
-        //                {
-        //                    fy += 50;
-        //                }
-
-        //                if ((fx + fy == (tx + ty - fx)) && fy != ty)
-        //                {
-        //                    fx -= 50;
-        //                    fy += 50;
-        //                }
-        //            }
-        //            if (fx + fy == tx + ty)//ldiag
-        //            {
-        //                if (fy != ty)
-        //                {
-        //                    fx -= 50;
-        //                    fy += 50;
-        //                }
-        //            }
-        //        }
-
-        //        //////////////////////////////////////////////
-
-        //        if (fy > ty)//u
-        //        {
-        //            if (fx - fy < tx - ty)//leftup
-        //            {
-        //                if (fx != (tx - ty + fy))
-        //                {
-        //                    fx -= 50;
-        //                }
-
-        //                if ((fx == (tx - ty + fy)) && fx != tx)
-        //                {
-        //                    fx -= 50;
-        //                    fy -= 50;
-        //                }
-        //            }
-
-        //            if (fx - fy > tx - ty)//upleft
-        //            {
-        //                if (fx != (tx - ty + fy))
-        //                {
-        //                    fy -= 50;
-        //                }
-
-        //                if ((fx == (tx - ty + fy)) && fy != ty)
-        //                {
-        //                    fx += 50;
-        //                    fy -= 50;
-        //                }
-        //            }
-        //            if (fx - fy == tx - ty)//rddiag
-        //            {
-        //                if (fy != ty)
-        //                {
-        //                    fx -= 50;
-        //                    fy -= 50;
-        //                }
-        //            }
-        //        }
-        //    }
-        //}
-
+                
     }
 }
 

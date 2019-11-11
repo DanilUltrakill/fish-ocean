@@ -3,10 +3,14 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:oxy="http://oxyplot.org/wpf"
         xmlns:local="clr-namespace:Fish_ocean"
         mc:Ignorable="d"
         Title="Fish's ocean" Height="750" Width="1000" WindowStartupLocation="Manual" Closed="Window_Closed">
-    <Grid>
+    <!--<Window.DataContext>-->
+        <!--<local:MainWindow/>
+    </Window.DataContext>-->
+    <Grid x:Name="mainfield" Visibility="Visible">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
@@ -16,9 +20,16 @@
         <Button x:Name="Reset" Content="Reset" HorizontalAlignment="Left" Height="21" Margin="234,7,0,0" VerticalAlignment="Top" Width="113" Click="Reset_Click"/>
         <Button x:Name="Options" Content="Options" HorizontalAlignment="Left" Height="18" Margin="352,10,0,0" VerticalAlignment="Top" Width="127" Click="Options_Click"/>
         <Image Margin="1395,395,-451.4,275.8" Source="12 TANGOS.gif" Stretch="Fill"/>
-        <Image Margin="1395,395,-451.4,275.8" Source="roflanRibalo.gif" Stretch="Fill"/>
-        <Image Margin="1395,395,-451.4,275.8" Source="FAST_AND_FURIOUS.gif" Stretch="Fill"/>
-
+        <Image Margin="1395,395,-451.4,275.8" Source="roflanRibalo.png" Stretch="Fill"/>
+        <Image Margin="1395,395,-451.4,275.8" Source="FAST_AND_FURIOUS.png" Stretch="Fill"/>
+        <Grid x:Name="chart" HorizontalAlignment="Left" Height="712" VerticalAlignment="Top" Width="972" Margin="10,7,0,0" IsHitTestVisible="False" Visibility="Hidden">
+            <oxy:Plot Title="{Binding Title}" Margin="24,0,10,48">
+                <oxy:Plot.Series>
+                    <oxy:LineSeries ItemsSource="{Binding fastf}"/>
+                    <oxy:LineSeries ItemsSource="{Binding staminaf}"/>
+                </oxy:Plot.Series>
+            </oxy:Plot>
+        </Grid>
     </Grid>
 </Window>
 

@@ -24,6 +24,7 @@ namespace Fish_ocean
         List<fastf> fastfish = new List<fastf>();
         List<staminaf> staminafish = new List<staminaf>();
         List<tango> tangos = new List<tango>();
+        List<fish> fish = new List<fish>();
 
         System.Windows.Threading.DispatcherTimer FastRibki;
         System.Windows.Threading.DispatcherTimer StaminaRibki;
@@ -48,7 +49,7 @@ namespace Fish_ocean
         Options options = new Options();
 
         Random rnd = new Random();
-        int cordx, cordy;
+        int round;
 
         private void fish_spawn(int fast, int stamina)
         {
@@ -63,7 +64,7 @@ namespace Fish_ocean
                 fish1.fishsr.Margin = new Thickness(fish1.fx, fish1.fy, 0, 0);
                 scene.Children.Add(fish1.fishsr);
                 staminafish.Add(fish1);
-
+                fish.Add(fish1);
             }
 
             for (int i = fast; i > 0; i--)
@@ -76,8 +77,7 @@ namespace Fish_ocean
                 fish2.fishfr.Margin = new Thickness(fish2.fx, fish2.fy, 0, 0);
                 scene.Children.Add(fish2.fishfr);
                 fastfish.Add(fish2);
-
-
+                fish.Add(fish2);
             }
         }
         public void proverka(int a, int b, out int x, out int y)
@@ -116,14 +116,69 @@ namespace Fish_ocean
 
         private void Start_Click(object sender, RoutedEventArgs e)
         {
+
             int fast = int.Parse(options.fast);
             int stamina = int.Parse(options.stamina);
             int tango = int.Parse(options.tango);
-            fish_spawn(fast, stamina);
-            tango_spawn(tango);
-            fast = 0;
-            stamina = 0;
-            tango = 0;
+
+            if (round == 0)
+            {
+                fish_spawn(fast, stamina);
+                tango_spawn(tango);
+            }
+            else
+            {
+                int f=0, s=0;
+                foreach (fish fish in fish)
+                {
+                    int del = -1;
+                    int cur = -1;
+                    foreach (fastf ff in fastfish)
+                    {
+                        cur++;
+                        if (ff.pregnant == false)
+                        {
+                            del = cur;
+                            scene.Children.Remove(ff.fishfr);
+                        }
+                    }
+                    if (del!=-1)
+                    {
+                        fastfish.RemoveAt(del);
+                    }
+                }
+                foreach (fish fish in fish)
+                {
+                    int del = -1;
+                    int cur = -1;
+                    foreach (staminaf sf in staminafish)
+                    {
+                        cur++;
+                        if (sf.pregnant == false)
+                        {
+                            del = cur;
+                            scene.Children.Remove(sf.fishsr);
+                        }
+                    }
+                    if (del != -1)
+                    {
+                        staminafish.RemoveAt(del);
+                    }
+                }
+                foreach (fastf ff in fastfish)
+                {
+                    if (ff.pregnant == true)
+                        f++;
+                }
+                foreach (staminaf sf in staminafish)
+                {
+                    if (sf.pregnant == true)
+                        s++;
+                }
+                fish_spawn(f, s);
+                tango_spawn(tango);
+            }
+            round++;
 
             FastRibki = new System.Windows.Threading.DispatcherTimer();
             FastRibki.Tick += new EventHandler(FastRibki_Tick);
@@ -171,10 +226,13 @@ namespace Fish_ocean
                 StaminaRibki.Stop();
             }
 
+            int curfastfish = -1;
+
             foreach (fastf ff in fastfish)
             {
                 double MinDistance1 = 1081.665;
                 int curtango = -1;
+                curfastfish++;
                 foreach (tango tango in tangos)
                 {
                     curtango++;
@@ -190,13 +248,21 @@ namespace Fish_ocean
                     if (ff.fx == tango.tx & ff.fy == tango.ty)
                     {
                         scene.Children.Remove(tango.tangofr);
+                        ff.pregnant = true;
                     }
                 }
 
-                if (ff.fx == tx & ff.fy == ty)
+                try
                 {
-                    tangos.RemoveAt(tangofast);
-                }                
+                    if (ff.fx == tx & ff.fy == ty)
+                    {
+                        tangos.RemoveAt(tangofast);
+                    }
+                }
+                catch(ArgumentOutOfRangeException)
+                {
+
+                }
 
                 //тут как рыбка будет двигаться к танго
                 if (ff.fy == ty)//rl
@@ -425,11 +491,14 @@ namespace Fish_ocean
                 StaminaRibki.Stop();
             }
 
+            int curstaminafish = -1;
+
             foreach (staminaf sf in staminafish)
             {
                 //sf.fishsr = new TranslateTransform(sf.fx, sf.fy);
                 double MinDistance2 = 1081.665;
                 int curtango = -1;
+                curstaminafish++;
                 foreach (tango tango in tangos)
                 {
                     curtango ++;
@@ -445,13 +514,21 @@ namespace Fish_ocean
                     if (sf.fx == tango.tx & sf.fy == tango.ty)
                     {
                         scene.Children.Remove(tango.tangofr);
+                        sf.pregnant = true;
                     }
                 }
 
-                if (sf.fx == tx & sf.fy == ty)
+                try
                 {
-                    tangos.RemoveAt(tangostam);
-                }                
+                    if (sf.fx == tx & sf.fy == ty)
+                    {
+                        tangos.RemoveAt(tangostam);
+                    }
+                }
+                catch(ArgumentOutOfRangeException)
+                {
+
+                }
 
                 if (sf.fy == ty)//rl
                 {
@@ -671,7 +748,216 @@ namespace Fish_ocean
                 //}
             }
             
-        }
+        }        
+
+        //private void move(int fx,int fy, int tx, int ty)
+        //{
+        //    if (fy == ty)//rl
+        //    {
+        //        if (fx < tx)//r
+        //        {
+        //            if (fx != tx)
+        //            {
+        //                fx += 50;
+        //            }
+        //        }
+
+        //        if (fx > tx)//l
+        //        {
+        //            if (fx != tx)
+        //            {
+        //                fx -= 50;
+        //            }
+        //        }
+        //    }
+
+        //    if (fx == tx)
+        //    {
+        //        if (fy < ty)//d
+        //        {
+        //            if (fy != ty)
+        //            {
+        //                fy += 50;
+        //            }
+        //        }
+
+        //        if (fy > ty)//u
+        //        {
+        //            if (fy != ty)
+        //            {
+        //                fy -= 50;
+        //            }
+        //        }
+        //    }
+
+        //    if (fx < tx) //r
+        //    {
+        //        if (fy < ty)//d
+        //        {
+        //            if (fx - fy < tx - ty)//rightdown
+        //            {
+        //                if (fx != (tx - ty + fy))
+        //                {
+        //                    fx += 50;
+        //                }
+
+        //                if ((fx == (tx - ty + fy)) && fx != tx)
+        //                {
+        //                    fx += 50;
+        //                    fy += 50;
+        //                }
+        //            }
+
+        //            if (fx - fy > tx - ty)//downright
+        //            {
+        //                if (fy != (fx - tx + ty))
+        //                {
+        //                    fy += 50;
+        //                }
+
+        //                if ((fy != (fx - tx + ty)) && fy != ty)
+        //                {
+        //                    fx += 50;
+        //                    fy += 50;
+        //                }
+        //            }
+        //            if (fx - fy == tx - ty)//rddiag
+        //            {
+        //                if (fy != ty)
+        //                {
+        //                    fx += 50;
+        //                    fy += 50;
+        //                }
+        //            }
+        //        }
+
+        //        //////////////////////////////////////////////
+
+        //        if (fy > ty)//u
+        //        {
+        //            if (fx + fy < tx + ty)//rightup
+        //            {
+        //                if (fx + fy != (tx + ty - fy))
+        //                {
+        //                    fx += 50;
+        //                }
+
+        //                if ((fx + fy == (tx + ty - fy)) && fx != tx)
+        //                {
+        //                    fx += 50;
+        //                    fy -= 50;
+        //                }
+        //            }
+
+        //            if (fx + fy > tx + ty)//upright
+        //            {
+        //                if (fx + fy != (tx + ty - fx))
+        //                {
+        //                    fy -= 50;
+        //                }
+
+        //                if ((fx + fy == (tx + ty - fx)) && fy != ty)
+        //                {
+        //                    fx += 50;
+        //                    fy -= 50;
+        //                }
+        //            }
+        //            if (Math.Sqrt(Math.Pow(fx + fy, 2)) == Math.Sqrt(Math.Pow(tx + ty, 2)))//rdiag
+        //            {
+        //                if (fy != ty)
+        //                {
+        //                    fx += 50;
+        //                    fy -= 50;
+        //                }
+        //            }
+        //        }
+        //    }
+
+        //    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        //    if (fx > tx) //l
+        //    {
+        //        if (fy < ty)//d
+        //        {
+        //            if (fx + fy > tx + ty)//leftdown
+        //            {
+        //                if (fx + fy != (tx + ty - fy))
+        //                {
+        //                    fx -= 50;
+        //                }
+
+        //                if ((fx + fy == (tx + ty - fy)) && fx != tx)
+        //                {
+        //                    fx -= 50;
+        //                    fy += 50;
+        //                }
+        //            }
+
+        //            if (fx + fy < tx + ty)//downleft
+        //            {
+        //                if (fx + fy != (tx + ty - fx))
+        //                {
+        //                    fy += 50;
+        //                }
+
+        //                if ((fx + fy == (tx + ty - fx)) && fy != ty)
+        //                {
+        //                    fx -= 50;
+        //                    fy += 50;
+        //                }
+        //            }
+        //            if (fx + fy == tx + ty)//ldiag
+        //            {
+        //                if (fy != ty)
+        //                {
+        //                    fx -= 50;
+        //                    fy += 50;
+        //                }
+        //            }
+        //        }
+
+        //        //////////////////////////////////////////////
+
+        //        if (fy > ty)//u
+        //        {
+        //            if (fx - fy < tx - ty)//leftup
+        //            {
+        //                if (fx != (tx - ty + fy))
+        //                {
+        //                    fx -= 50;
+        //                }
+
+        //                if ((fx == (tx - ty + fy)) && fx != tx)
+        //                {
+        //                    fx -= 50;
+        //                    fy -= 50;
+        //                }
+        //            }
+
+        //            if (fx - fy > tx - ty)//upleft
+        //            {
+        //                if (fx != (tx - ty + fy))
+        //                {
+        //                    fy -= 50;
+        //                }
+
+        //                if ((fx == (tx - ty + fy)) && fy != ty)
+        //                {
+        //                    fx += 50;
+        //                    fy -= 50;
+        //                }
+        //            }
+        //            if (fx - fy == tx - ty)//rddiag
+        //            {
+        //                if (fy != ty)
+        //                {
+        //                    fx -= 50;
+        //                    fy -= 50;
+        //                }
+        //            }
+        //        }
+        //    }
+        //}
 
     }
 }

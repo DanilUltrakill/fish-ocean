@@ -128,7 +128,7 @@ namespace Fish_ocean
             }
             else
             {
-                int f=0, s=0;
+                //int f=0, s=0;
                 foreach (fish fish in fish)
                 {
                     int del = -1;
@@ -136,7 +136,7 @@ namespace Fish_ocean
                     foreach (fastf ff in fastfish)
                     {
                         cur++;
-                        if (ff.pregnant == false)
+                        if (ff.pregnant < 2)
                         {
                             del = cur;
                             scene.Children.Remove(ff.fishfr);
@@ -154,7 +154,7 @@ namespace Fish_ocean
                     foreach (staminaf sf in staminafish)
                     {
                         cur++;
-                        if (sf.pregnant == false)
+                        if (sf.pregnant == 0)
                         {
                             del = cur;
                             scene.Children.Remove(sf.fishsr);
@@ -163,19 +163,27 @@ namespace Fish_ocean
                     if (del != -1)
                     {
                         staminafish.RemoveAt(del);
-                    }
-                }
-                foreach (fastf ff in fastfish)
-                {
-                    if (ff.pregnant == true)
-                        f++;
+                    }                    
                 }
                 foreach (staminaf sf in staminafish)
                 {
-                    if (sf.pregnant == true)
-                        s++;
+                    sf.pregnant = 0;
                 }
-                fish_spawn(f, s);
+                foreach (fastf ff in fastfish)
+                {
+                    ff.pregnant = 0;
+                }
+                //foreach (fastf ff in fastfish)
+                //{
+                //    if (ff.pregnant == true)
+                //        f++;
+                //}
+                //foreach (staminaf sf in staminafish)
+                //{
+                //    if (sf.pregnant == true)
+                //        s++;
+                //}
+                //fish_spawn(f, s);
                 tango_spawn(tango);
             }
             round++;
@@ -248,7 +256,7 @@ namespace Fish_ocean
                     if (ff.fx == tango.tx & ff.fy == tango.ty)
                     {
                         scene.Children.Remove(tango.tangofr);
-                        ff.pregnant = true;
+                        ff.pregnant ++;
                     }
                 }
 
@@ -514,7 +522,7 @@ namespace Fish_ocean
                     if (sf.fx == tango.tx & sf.fy == tango.ty)
                     {
                         scene.Children.Remove(tango.tangofr);
-                        sf.pregnant = true;
+                        sf.pregnant ++;
                     }
                 }
 

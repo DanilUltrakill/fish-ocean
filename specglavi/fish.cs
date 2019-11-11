@@ -18,7 +18,7 @@ namespace specglavi
     class fish
     {
         public int fx, fy;
-        public bool pregnant=false;
+        public int pregnant = 0;
         public Rectangle fishsr = new Rectangle();
         public Rectangle fishfr = new Rectangle();
         public ImageBrush ibfishsr = new ImageBrush();

@@ -29,6 +29,7 @@ namespace Fish_ocean
         List<staminaf> staminafish = new List<staminaf>();
         List<tango> tangos = new List<tango>();
         List<fish> fish = new List<fish>();
+        
 
         System.Windows.Threading.DispatcherTimer FastRibki;
         System.Windows.Threading.DispatcherTimer StaminaRibki;
@@ -118,16 +119,27 @@ namespace Fish_ocean
                 tangos.Add(tango);
             }
         }
-
+        private void NextRound_Click(object sender, RoutedEventArgs e)
+        {
+            StartProgram();
+        }
+        private void NextRound_Click1(object sender, RoutedEventArgs e)
+        {
+            StartProgram();
+        }
         private void Start_Click(object sender, RoutedEventArgs e)
-        {            
+        {
+            StartProgram();
+        }
+        private void StartProgram()
+        {
             int fast = int.Parse(options.fast);
             int stamina = int.Parse(options.stamina);
             int tango = int.Parse(options.tango);
 
 
             chart.Visibility = Visibility.Hidden;
-            mainfield.Visibility = Visibility.Visible;
+
 
             if (round == 0)
             {
@@ -151,7 +163,7 @@ namespace Fish_ocean
                             scene.Children.Remove(ff.fishfr);
                         }
                     }
-                    if (del!=-1)
+                    if (del != -1)
                     {
                         fastfish.RemoveAt(del);
                     }
@@ -172,7 +184,7 @@ namespace Fish_ocean
                     if (del != -1)
                     {
                         staminafish.RemoveAt(del);
-                    }                    
+                    }
                 }
                 foreach (staminaf sf in staminafish)
                 {
@@ -196,38 +208,40 @@ namespace Fish_ocean
                 tango_spawn(tango);
             }
 
-            XmlDocument xDoc = new XmlDocument();
-            xDoc.Load("C:\\Users\\user\\source\\repos\\specglavi\\specglavi\\stats.xml");
-            XmlElement xRoot = xDoc.DocumentElement;
-            XmlElement OptionsElem = xDoc.CreateElement("Round");
-            XmlAttribute numAttr = xDoc.CreateAttribute("id");
+            //XmlDocument xDoc = new XmlDocument();
+            //xDoc.Load("C:\\Users\\Андрей\\source\\repos\\fish-ocean4\\specglavi\\stats.xml");
+            //// xDoc.Load("C:\\Users\\user\\source\\repos\\specglavi\\specglavi\\stats.xml");
+            //XmlElement xRoot = xDoc.DocumentElement;
+            //XmlElement OptionsElem = xDoc.CreateElement("Round");
+            //XmlAttribute numAttr = xDoc.CreateAttribute("id");
 
-            XmlElement CYF = xDoc.CreateElement("Fast_Fish");
-            XmlElement CPF = xDoc.CreateElement("Stamina_Fish");
+            //XmlElement CYF = xDoc.CreateElement("Fast_Fish");
+            //XmlElement CPF = xDoc.CreateElement("Stamina_Fish");
 
-            XmlText roundNum = xDoc.CreateTextNode(round.ToString());
-            XmlText CYFn = xDoc.CreateTextNode(fastfish.Count().ToString());
-            XmlText CPFn = xDoc.CreateTextNode(staminafish.Count().ToString());
+            //XmlText roundNum = xDoc.CreateTextNode(round.ToString());
+            //XmlText CYFn = xDoc.CreateTextNode(fastfish.Count().ToString());
+            //XmlText CPFn = xDoc.CreateTextNode(staminafish.Count().ToString());
 
-            //Creating nodes
-            numAttr.AppendChild(roundNum);
-            CYF.AppendChild(CYFn);
-            CPF.AppendChild(CPFn);
-            OptionsElem.Attributes.Append(numAttr);
-            OptionsElem.AppendChild(CYF);
-            OptionsElem.AppendChild(CPF);
-            xRoot.AppendChild(OptionsElem);
-            xDoc.Save("C:\\Users\\user\\source\\repos\\specglavi\\specglavi\\stats.xml");
+            ////Creating nodes
+            //numAttr.AppendChild(roundNum);
+            //CYF.AppendChild(CYFn);
+            //CPF.AppendChild(CPFn);
+            //OptionsElem.Attributes.Append(numAttr);
+            //OptionsElem.AppendChild(CYF);
+            //OptionsElem.AppendChild(CPF);
+            //xRoot.AppendChild(OptionsElem);
+            ////xDoc.Save("C:\\Users\\user\\source\\repos\\specglavi\\specglavi\\stats.xml");
+            //xDoc.Save("C:\\Users\\Андрей\\source\\repos\\fish-ocean4\\specglavi\\stats.xml");
 
             round++;
 
             Rounding = new System.Windows.Threading.DispatcherTimer();
             Rounding.Tick += new EventHandler(Rounding_Tick);
-            Rounding.Interval = new TimeSpan(0, 0, 0, 1);
+            Rounding.Interval = new TimeSpan(0, 0, 0, 2);
 
             FastRibki = new System.Windows.Threading.DispatcherTimer();
             FastRibki.Tick += new EventHandler(FastRibki_Tick);
-            FastRibki.Interval = new TimeSpan(0,0,0,1);
+            FastRibki.Interval = new TimeSpan(0, 0, 0, 1);
 
             StaminaRibki = new System.Windows.Threading.DispatcherTimer();
             StaminaRibki.Tick += new EventHandler(StaminaRibki_Tick);
@@ -264,14 +278,69 @@ namespace Fish_ocean
         double cur;
         int tangofast, tangostam;
 
+        //MVM graf = new MVM();
+
+        //private void painting()
+        //{
+        //    XDocument xdoc = XDocument.Load("C:\\Users\\user\\source\\repos\\specglavi\\specglavi\\stats.xml");
+        //    //XDocument xdoc = XDocument.Load("C:\\Users\\user\\source\\repos\\specglavi\\specglavi\\stats.xml");
+        //    foreach (XElement elem in xdoc.Element("simulation").Elements("Round"))
+        //    {
+        //        XAttribute attrName = elem.Attribute("id");
+        //        XElement ffcount = elem.Element("Fast_Fish");
+        //        XElement sfcount = elem.Element("Stamina_Fish");
+        //        double tcount = 10;
+
+        //        if (attrName != null && ffcount != null && sfcount != null)
+        //        {
+        //            DataPoint point1 = new DataPoint(double.Parse(attrName.Value), double.Parse(ffcount.Value));
+        //            DataPoint point2 = new DataPoint(double.Parse(attrName.Value), double.Parse(sfcount.Value));
+        //            DataPoint point3 = new DataPoint(double.Parse(attrName.Value), tcount);
+        //            graf.fastf.Add(point1);
+        //            graf.staminaf.Add(point2);
+        //            graf.tango.Add(point3);
+        //        }
+        //    }
+        //}
+
         private void Rounding_Tick(object sender, EventArgs e)
         {
             if (!tangos.Any())
             {
                 FastRibki.Stop();
                 StaminaRibki.Stop();
-                chart.Visibility = Visibility.Visible;
-                mainfield.Visibility = Visibility.Hidden;
+
+                XmlDocument xDoc = new XmlDocument();
+                xDoc.Load("C:\\Users\\user\\source\\repos\\specglavi\\specglavi\\stats.xml");
+                // xDoc.Load("C:\\Users\\user\\source\\repos\\specglavi\\specglavi\\stats.xml");
+                XmlElement xRoot = xDoc.DocumentElement;
+                XmlElement OptionsElem = xDoc.CreateElement("Round");
+                XmlAttribute numAttr = xDoc.CreateAttribute("id");
+
+                XmlElement CYF = xDoc.CreateElement("Fast_Fish");
+                XmlElement CPF = xDoc.CreateElement("Stamina_Fish");
+
+                XmlText roundNum = xDoc.CreateTextNode(round.ToString());
+                XmlText CYFn = xDoc.CreateTextNode(fastfish.Count().ToString());
+                XmlText CPFn = xDoc.CreateTextNode(staminafish.Count().ToString());
+
+                //Creating nodes
+                numAttr.AppendChild(roundNum);
+                CYF.AppendChild(CYFn);
+                CPF.AppendChild(CPFn);
+                OptionsElem.Attributes.Append(numAttr);
+                OptionsElem.AppendChild(CYF);
+                OptionsElem.AppendChild(CPF);
+                xRoot.AppendChild(OptionsElem);
+                //xDoc.Save("C:\\Users\\user\\source\\repos\\specglavi\\specglavi\\stats.xml");
+                xDoc.Save("C:\\Users\\user\\source\\repos\\specglavi\\specglavi\\stats.xml");
+
+                if (round == 3)
+                {
+                    //painting();
+                    chart.Visibility = Visibility.Visible;
+                }
+
                 Rounding.Stop();
             }
         }
@@ -297,7 +366,7 @@ namespace Fish_ocean
                 {
                     curtango++;
                     cur = Math.Sqrt(Math.Pow(ff.fx - tango.tx, 2) + Math.Pow(ff.fy - tango.ty, 2));
-                    if (cur<MinDistance1)
+                    if (cur < MinDistance1)
                     {
                         MinDistance1 = cur;
                         tx = tango.tx;
@@ -308,7 +377,7 @@ namespace Fish_ocean
                     if (ff.fx == tango.tx & ff.fy == tango.ty)
                     {
                         scene.Children.Remove(tango.tangofr);
-                        ff.pregnant ++;
+                        ff.pregnant++;
                     }
                 }
 
@@ -319,7 +388,7 @@ namespace Fish_ocean
                         tangos.RemoveAt(tangofast);
                     }
                 }
-                catch(ArgumentOutOfRangeException)
+                catch (ArgumentOutOfRangeException)
                 {
 
                 }
@@ -415,7 +484,7 @@ namespace Fish_ocean
                                 ff.fx += 50;
                             }
 
-                            if ((ff.fx + ff.fy == (tx + ty - ff.fy))&&ff.fx != tx)
+                            if ((ff.fx + ff.fy == (tx + ty - ff.fy)) && ff.fx != tx)
                             {
                                 ff.fx += 50;
                                 ff.fy -= 50;
@@ -429,7 +498,7 @@ namespace Fish_ocean
                                 ff.fy -= 50;
                             }
 
-                            if ((ff.fx + ff.fy == (tx + ty - ff.fx)) &&ff.fy != ty)
+                            if ((ff.fx + ff.fy == (tx + ty - ff.fx)) && ff.fy != ty)
                             {
                                 ff.fx += 50;
                                 ff.fy -= 50;
@@ -459,7 +528,7 @@ namespace Fish_ocean
                                 ff.fx -= 50;
                             }
 
-                            if ((ff.fx + ff.fy == (tx + ty - ff.fy))&&ff.fx != tx)
+                            if ((ff.fx + ff.fy == (tx + ty - ff.fy)) && ff.fx != tx)
                             {
                                 ff.fx -= 50;
                                 ff.fy += 50;
@@ -473,7 +542,7 @@ namespace Fish_ocean
                                 ff.fy += 50;
                             }
 
-                            if ((ff.fx + ff.fy == (tx + ty - ff.fx))&&ff.fy != ty)
+                            if ((ff.fx + ff.fy == (tx + ty - ff.fx)) && ff.fy != ty)
                             {
                                 ff.fx -= 50;
                                 ff.fy += 50;
@@ -500,7 +569,7 @@ namespace Fish_ocean
                                 ff.fx -= 50;
                             }
 
-                            if ((ff.fx == (tx - ty + ff.fy)) &&ff.fx != tx)
+                            if ((ff.fx == (tx - ty + ff.fy)) && ff.fx != tx)
                             {
                                 ff.fx -= 50;
                                 ff.fy -= 50;
@@ -514,7 +583,7 @@ namespace Fish_ocean
                                 ff.fy -= 50;
                             }
 
-                            if ((ff.fx == (tx - ty + ff.fy)) &&ff.fy != ty)
+                            if ((ff.fx == (tx - ty + ff.fy)) && ff.fy != ty)
                             {
                                 ff.fx -= 50;
                                 ff.fy -= 50;
@@ -561,7 +630,7 @@ namespace Fish_ocean
                 curstaminafish++;
                 foreach (tango tango in tangos)
                 {
-                    curtango ++;
+                    curtango++;
                     cur = Math.Sqrt(Math.Pow(sf.fx - tango.tx, 2) + Math.Pow(sf.fy - tango.ty, 2));
                     if (cur < MinDistance2)
                     {
@@ -574,7 +643,7 @@ namespace Fish_ocean
                     if (sf.fx == tango.tx & sf.fy == tango.ty)
                     {
                         scene.Children.Remove(tango.tangofr);
-                        sf.pregnant ++;
+                        sf.pregnant++;
                     }
                 }
 
@@ -585,7 +654,7 @@ namespace Fish_ocean
                         tangos.RemoveAt(tangostam);
                     }
                 }
-                catch(ArgumentOutOfRangeException)
+                catch (ArgumentOutOfRangeException)
                 {
 
                 }
@@ -639,7 +708,7 @@ namespace Fish_ocean
                                 sf.fx += 50;
                             }
 
-                            if ((sf.fx == (tx - ty))&&sf.fx != tx)
+                            if ((sf.fx == (tx - ty)) && sf.fx != tx)
                             {
                                 sf.fx += 50;
                                 sf.fy += 50;
@@ -653,7 +722,7 @@ namespace Fish_ocean
                                 sf.fy += 50;
                             }
 
-                            if ((sf.fy == (ty - tx)) &&sf.fy != ty)
+                            if ((sf.fy == (ty - tx)) && sf.fy != ty)
                             {
                                 sf.fx += 50;
                                 sf.fy += 50;
@@ -680,7 +749,7 @@ namespace Fish_ocean
                                 sf.fx += 50;
                             }
 
-                            if ((sf.fx + sf.fy == (tx - ty))&&sf.fx != tx)
+                            if ((sf.fx + sf.fy == (tx - ty)) && sf.fx != tx)
                             {
                                 sf.fx += 50;
                                 sf.fy -= 50;
@@ -694,7 +763,7 @@ namespace Fish_ocean
                                 sf.fy -= 50;
                             }
 
-                            if ((sf.fx + sf.fy == (ty - tx))&&sf.fy != ty)
+                            if ((sf.fx + sf.fy == (ty - tx)) && sf.fy != ty)
                             {
                                 sf.fx += 50;
                                 sf.fy -= 50;
@@ -724,7 +793,7 @@ namespace Fish_ocean
                                 sf.fx -= 50;
                             }
 
-                            if ((sf.fx + sf.fy == tx + ty)&&sf.fx != tx)
+                            if ((sf.fx + sf.fy == tx + ty) && sf.fx != tx)
                             {
                                 sf.fx -= 50;
                                 sf.fy += 50;
@@ -738,7 +807,7 @@ namespace Fish_ocean
                                 sf.fy += 50;
                             }
 
-                            if ((sf.fx + sf.fy == ty + tx)&&sf.fy != ty)
+                            if ((sf.fx + sf.fy == ty + tx) && sf.fy != ty)
                             {
                                 sf.fx -= 50;
                                 sf.fy += 50;
@@ -765,7 +834,7 @@ namespace Fish_ocean
                                 sf.fx -= 50;
                             }
 
-                            if ((sf.fx == (ty - tx))&&sf.fx != tx)
+                            if ((sf.fx == (ty - tx)) && sf.fx != tx)
                             {
                                 sf.fx -= 50;
                                 sf.fy -= 50;
@@ -774,12 +843,12 @@ namespace Fish_ocean
 
                         if (sf.fx - sf.fy > tx - ty)//upleft
                         {
-                            if (sf.fy != (tx - ty))
+                            if (sf.fy != (tx - ty + sf.fy))
                             {
                                 sf.fy -= 50;
                             }
 
-                            if ((sf.fy != (tx - ty))&&sf.fy != ty)
+                            if ((sf.fy != (tx - ty + sf.fy)) && sf.fy != ty)
                             {
                                 sf.fx -= 50;
                                 sf.fy -= 50;
@@ -807,9 +876,9 @@ namespace Fish_ocean
                 //    scene.Children.Remove(sf.tangofr);
                 //}
             }
-            
-        }        
-                
+
+        }
+
     }
 }
 

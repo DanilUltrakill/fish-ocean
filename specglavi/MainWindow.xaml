@@ -5,31 +5,40 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:oxy="http://oxyplot.org/wpf"
         xmlns:local="clr-namespace:Fish_ocean"
-        mc:Ignorable="d"
-        Title="Fish's ocean" Height="750" Width="1000" WindowStartupLocation="Manual" Closed="Window_Closed">
-    <!--<Window.DataContext>-->
-        <!--<local:MainWindow/>
-    </Window.DataContext>-->
-    <Grid x:Name="mainfield" Visibility="Visible">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
-        <Canvas x:Name="scene" HorizontalAlignment="Left" Height="676" VerticalAlignment="Top" Width="972" Margin="10,33,0,0"/>
-        <Button x:Name="Start" Content="Start" HorizontalAlignment="Left" Height="21" Margin="10,7,0,0" VerticalAlignment="Top" Width="113" Click="Start_Click"/>
-        <Button x:Name="Pause" Content="Pause" HorizontalAlignment="Left" Height="21" Margin="128,7,0,0" VerticalAlignment="Top" Width="106"/>
-        <Button x:Name="Reset" Content="Reset" HorizontalAlignment="Left" Height="21" Margin="234,7,0,0" VerticalAlignment="Top" Width="113" Click="Reset_Click"/>
-        <Button x:Name="Options" Content="Options" HorizontalAlignment="Left" Height="18" Margin="352,10,0,0" VerticalAlignment="Top" Width="127" Click="Options_Click"/>
-        <Image Margin="1395,395,-451.4,275.8" Source="12 TANGOS.gif" Stretch="Fill"/>
-        <Image Margin="1395,395,-451.4,275.8" Source="roflanRibalo.png" Stretch="Fill"/>
-        <Image Margin="1395,395,-451.4,275.8" Source="FAST_AND_FURIOUS.png" Stretch="Fill"/>
-        <Grid x:Name="chart" HorizontalAlignment="Left" Height="712" VerticalAlignment="Top" Width="972" Margin="10,7,0,0" IsHitTestVisible="False" Visibility="Hidden">
-            <oxy:Plot Title="{Binding Title}" Margin="24,0,10,48">
-                <oxy:Plot.Series>
+        xmlns:local1="clr-namespace:specglavi"
+        mc:Ignorable=" d"
+        Title="Fish's ocean" Height="750" Width="1000" WindowStartupLocation="Manual" Closed="Window_Closed" Visibility="Visible">
+    <Window.DataContext>
+        <local1:MVM/>
+    </Window.DataContext>
+    <Grid Margin="0">
+        <Grid x:Name="mainfield" Visibility="Visible">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="206*"/>
+                <RowDefinition Height="513*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Canvas x:Name="scene" HorizontalAlignment="Left" Height="676" VerticalAlignment="Top" Width="972" Margin="10,33,0,0" Grid.RowSpan="2"/>
+            <Button x:Name="Start" Content="Start" HorizontalAlignment="Left" Height="21" Margin="10,7,0,0" VerticalAlignment="Top" Width="113" Click="Start_Click"/>
+            <Button x:Name="Pause" Content="Pause" HorizontalAlignment="Left" Height="21" Margin="128,7,0,0" VerticalAlignment="Top" Width="106"/>
+            <Button x:Name="Reset" Content="Reset" HorizontalAlignment="Left" Height="21" Margin="234,7,0,0" VerticalAlignment="Top" Width="113" Click="Reset_Click"/>
+            <Button x:Name="Options" Content="Options" HorizontalAlignment="Left" Height="18" Margin="352,10,0,0" VerticalAlignment="Top" Width="127" Click="Options_Click"/>
+            <Image Margin="1395,189,-451,276" Source="12 TANGOS.gif" Stretch="Fill" Grid.Row="1"/>
+            <Image Margin="1395,189,-451,276" Source="roflanRibalo.png" Stretch="Fill" Grid.Row="1"/>
+            <Image Margin="1395,189,-451,276" Source="FAST_AND_FURIOUS.png" Stretch="Fill" Grid.Row="1"/>
+            <Button x:Name="NextRound" Content="Next" HorizontalAlignment="Left" Margin="508,10,0,0" VerticalAlignment="Top" Width="75" Click="NextRound_Click1"/>
+            <Grid x:Name="chart" HorizontalAlignment="Left" Height="676" VerticalAlignment="Top" Width="972" Margin="10,43,0,0" IsHitTestVisible="False" Grid.RowSpan="2" Visibility="Hidden">
+                <oxy:Plot Title="{Binding Title}" Margin="24,0,10,48" d:IsHidden="True">
                     <oxy:LineSeries ItemsSource="{Binding fastf}"/>
                     <oxy:LineSeries ItemsSource="{Binding staminaf}"/>
-                </oxy:Plot.Series>
-            </oxy:Plot>
+                    <oxy:LineSeries ItemsSource="{Binding tango}"/>
+                </oxy:Plot>
+
+            </Grid>
         </Grid>
+
     </Grid>
 </Window>
 

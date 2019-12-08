@@ -81,15 +81,8 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Options.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Options.xaml.cs">
-      <DependentUpon>Options.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -130,6 +123,48 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="pictures\12_TANGOS.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="pictures\MAINMENU.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="pictures\PLAYBUTTON.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="pictures\OPTIONSBUTTON.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="pictures\CREDITSBUTTON.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="pictures\NEXT.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="pictures\CHOOSEGAMEMODE.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="pictures\NORMAL.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="pictures\EGOISM.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="pictures\OPTIONSMENU.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="pictures\OPTIONSMENU2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="pictures\MENUBUTTON.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="pictures\OKBOOMER.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="pictures\TEXTBOX.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="pictures\gggggggggggggggg.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

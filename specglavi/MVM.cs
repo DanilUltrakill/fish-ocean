@@ -13,7 +13,7 @@ namespace specglavi
         public string Title { get; private set; }
         public IList<DataPoint> fastf { get; private set; }
         public IList<DataPoint> staminaf { get; private set; }
-        public IList<DataPoint> tango { get; private set; }
+        public IList<DataPoint> tango { get; private set; }        
 
         public MVM()
         {
@@ -21,8 +21,7 @@ namespace specglavi
             fastf = new List<DataPoint>();
             staminaf = new List<DataPoint>();
             tango = new List<DataPoint>();
-
-
+            
             XDocument xdoc = XDocument.Load("C:\\Users\\user\\source\\repos\\specglavi\\specglavi\\stats.xml");
             //XDocument xdoc = XDocument.Load("C:\\Users\\user\\source\\repos\\specglavi\\specglavi\\stats.xml");
             foreach (XElement elem in xdoc.Element("simulation").Elements("Round"))

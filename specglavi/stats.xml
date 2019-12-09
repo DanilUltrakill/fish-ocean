@@ -1,15 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <simulation>
   <Round id="1">
-    <Fast_Fish>0</Fast_Fish>
-    <Stamina_Fish>2</Stamina_Fish>
-  </Round>
-  <Round id="2">
-    <Fast_Fish>0</Fast_Fish>
-    <Stamina_Fish>4</Stamina_Fish>
-  </Round>
-  <Round id="3">
-    <Fast_Fish>0</Fast_Fish>
-    <Stamina_Fish>6</Stamina_Fish>
+    <Fast_Fish>6</Fast_Fish>
+    <Stamina_Fish>0</Stamina_Fish>
   </Round>
 </simulation>

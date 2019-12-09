@@ -28,8 +28,7 @@ namespace Fish_ocean
         List<fastf> fastfish = new List<fastf>();
         List<staminaf> staminafish = new List<staminaf>();
         List<tango> tangos = new List<tango>();
-        List<fish> fish = new List<fish>();
-        
+        List<fish> fish = new List<fish>();        
 
         System.Windows.Threading.DispatcherTimer FastRibki;
         System.Windows.Threading.DispatcherTimer StaminaRibki;
@@ -220,11 +219,11 @@ namespace Fish_ocean
                     {
                         foreach (fastf ff in fastfish)
                         {
-                            if (ff.pregnant > 1)
+                            while (ff.pregnant > 1)
                             {
                                 foreach (fastf af in fastfish)
                                 {
-                                    if (af.pregnant == 0)
+                                    if (af.pregnant == 0 && ff.pregnant>1)
                                     {
                                         af.pregnant++;
                                         ff.pregnant--;
@@ -291,19 +290,19 @@ namespace Fish_ocean
 
             Rounding = new System.Windows.Threading.DispatcherTimer();
             Rounding.Tick += new EventHandler(Rounding_Tick);
-            Rounding.Interval = new TimeSpan(0, 0, 0, 2);
+            Rounding.Interval = new TimeSpan(0, 0, 0, 0, 400);
 
             FastRibki = new System.Windows.Threading.DispatcherTimer();
             FastRibki.Tick += new EventHandler(FastRibki_Tick);
-            FastRibki.Interval = new TimeSpan(0, 0, 0, 1);
+            FastRibki.Interval = new TimeSpan(0, 0, 0, 0, 400);
 
             StaminaRibki = new System.Windows.Threading.DispatcherTimer();
             StaminaRibki.Tick += new EventHandler(StaminaRibki_Tick);
-            StaminaRibki.Interval = new TimeSpan(0, 0, 0, 2);
+            StaminaRibki.Interval = new TimeSpan(0, 0, 0, 0, 800);
 
             Poihali = new System.Windows.Threading.DispatcherTimer();
             Poihali.Tick += new EventHandler(Poihali_Tick);
-            Poihali.Interval = new TimeSpan(0, 0, 0, 1);
+            Poihali.Interval = new TimeSpan(0, 0, 0, 0, 400);
 
             Rounding.Start();
             if (normal == true)
@@ -333,31 +332,6 @@ namespace Fish_ocean
         int tx, ty;
         double cur;
         int tangofast, tangostam;
-
-        //MVM graf = new MVM();
-
-        //private void painting()
-        //{
-        //    XDocument xdoc = XDocument.Load("C:\\Users\\user\\source\\repos\\specglavi\\specglavi\\stats.xml");
-        //    //XDocument xdoc = XDocument.Load("C:\\Users\\user\\source\\repos\\specglavi\\specglavi\\stats.xml");
-        //    foreach (XElement elem in xdoc.Element("simulation").Elements("Round"))
-        //    {
-        //        XAttribute attrName = elem.Attribute("id");
-        //        XElement ffcount = elem.Element("Fast_Fish");
-        //        XElement sfcount = elem.Element("Stamina_Fish");
-        //        double tcount = 10;
-
-        //        if (attrName != null && ffcount != null && sfcount != null)
-        //        {
-        //            DataPoint point1 = new DataPoint(double.Parse(attrName.Value), double.Parse(ffcount.Value));
-        //            DataPoint point2 = new DataPoint(double.Parse(attrName.Value), double.Parse(sfcount.Value));
-        //            DataPoint point3 = new DataPoint(double.Parse(attrName.Value), tcount);
-        //            graf.fastf.Add(point1);
-        //            graf.staminaf.Add(point2);
-        //            graf.tango.Add(point3);
-        //        }
-        //    }
-        //}
 
         private void Poihali_Tick(object sender, EventArgs e)
         {
@@ -915,10 +889,44 @@ namespace Fish_ocean
                 {
                     //painting();
                     //MVM();
+                    //add_point();
+                    Plot.InvalidatePlot(true);
                     chart.Visibility = Visibility.Visible;
                     NextRound.Visibility = Visibility.Hidden;
                 }
             }
+        }
+
+        private void create_chart()
+        {
+            var model = new PlotModel { Title = "Fish Ocean" };
+            model.Axes.Add(new LinearAxis { Position = AxisPosition.Bottom, Minimum = -20, Maximum = 80 });
+            model.Axes.Add(new LinearAxis { Position = AxisPosition.Left, Minimum = -10, Maximum = 10 });
+        }
+
+        private void add_point()
+        {
+            MVM graf = new MVM();
+            XDocument xdoc = XDocument.Load("C:\\Users\\user\\source\\repos\\specglavi\\specglavi\\stats.xml");
+            //XDocument xdoc = XDocument.Load("C:\\Users\\user\\source\\repos\\specglavi\\specglavi\\stats.xml");
+            foreach (XElement elem in xdoc.Element("simulation").Elements("Round"))
+            {
+                XAttribute attrName = elem.Attribute("id");
+                XElement ffcount = elem.Element("Fast_Fish");
+                XElement sfcount = elem.Element("Stamina_Fish");
+                double tcount = 10;
+
+                if (attrName != null && ffcount != null && sfcount != null)
+                {
+                    DataPoint point1 = new DataPoint(double.Parse(attrName.Value), double.Parse(ffcount.Value));
+                    DataPoint point2 = new DataPoint(double.Parse(attrName.Value), double.Parse(sfcount.Value));
+                    DataPoint point3 = new DataPoint(double.Parse(attrName.Value), tcount);
+                    graf.fastf.Add(point1);
+                    graf.staminaf.Add(point2);
+                    graf.tango.Add(point3);
+                    Plot.InvalidatePlot();
+                }
+            }            
         }
 
         private void Normal_Click(object sender, RoutedEventArgs e)

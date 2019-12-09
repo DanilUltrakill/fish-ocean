@@ -8,6 +8,63 @@
         xmlns:local1="clr-namespace:specglavi"
         mc:Ignorable=" d"
         Title="Fish's ocean" Height="750" Width="1000" WindowStartupLocation="Manual" Closed="Window_Closed" Visibility="Visible">
+    <Window.Resources>
+        <Style x:Key="FocusVisual">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Rectangle Margin="2" SnapsToDevicePixels="true" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" StrokeThickness="1" StrokeDashArray="1 2"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <SolidColorBrush x:Key="Button.Static.Background" Color="#FFDDDDDD"/>
+        <SolidColorBrush x:Key="Button.Static.Border" Color="#FF707070"/>
+        <SolidColorBrush x:Key="Button.MouseOver.Background" Color="#FFBEE6FD"/>
+        <SolidColorBrush x:Key="Button.MouseOver.Border" Color="#FF3C7FB1"/>
+        <SolidColorBrush x:Key="Button.Pressed.Background" Color="#FFC4E5F6"/>
+        <SolidColorBrush x:Key="Button.Pressed.Border" Color="#FF2C628B"/>
+        <SolidColorBrush x:Key="Button.Disabled.Background" Color="#FFF4F4F4"/>
+        <SolidColorBrush x:Key="Button.Disabled.Border" Color="#FFADB2B5"/>
+        <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#FF838383"/>
+        <Style x:Key="Style" TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+            <Setter Property="Background" Value="{StaticResource Button.Static.Background}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="true">
+                            <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefaulted" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                            </Trigger>
+                            <!--<Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.MouseOver.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.MouseOver.Border}"/>
+                            </Trigger>-->
+                            <!--<Trigger Property="IsPressed" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Pressed.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Pressed.Border}"/>
+                            </Trigger>-->
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Disabled.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Disabled.Border}"/>
+                                <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource Button.Disabled.Foreground}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
     <Window.DataContext>
         <local1:MVM/>
     </Window.DataContext>
@@ -21,65 +78,74 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <Canvas x:Name="scene" HorizontalAlignment="Right" Height="750" VerticalAlignment="Top" Width="1000" Margin="-4,-3,-4,-28" Grid.RowSpan="2"/>
-            <Button x:Name="Normal" Content="" Height="120" Width="288" Canvas.Left="95" Canvas.Top="369" Margin="120,356,584,243" Grid.Row="1" Click="Normal_Click" d:IsHidden="True">
+            <Button x:Name="Normal" Content="" Height="120" Width="288" Canvas.Left="95" Canvas.Top="369" Margin="120,356,0,0" Grid.Row="1" Click="Normal_Click" d:IsHidden="True" Style="{DynamicResource Style}" HorizontalAlignment="Left" VerticalAlignment="Top">
                 <Button.Background>
                     <ImageBrush ImageSource="pictures/NORMAL.gif"/>
                 </Button.Background>
             </Button>
-            <Button x:Name="Egoism" Content="" Height="120" Width="288" Canvas.Left="526" Canvas.Top="369" Margin="584,356,120,243" Grid.Row="1" Click="Egoism_Click" d:IsHidden="True">
+            <Button x:Name="Egoism" Content="" Height="120" Width="288" Canvas.Left="526" Canvas.Top="369" Margin="584,356,0,0" Grid.Row="1" Click="Egoism_Click" d:IsHidden="True" Style="{DynamicResource Style}" HorizontalAlignment="Left" VerticalAlignment="Top">
                 <Button.Background>
                     <ImageBrush ImageSource="pictures/EGOISM.gif"/>
                 </Button.Background>
             </Button>
-            <Button x:Name="credits" Content="" Height="120" Width="288" Canvas.Left="66" Canvas.Top="564" Margin="54,510,650,91" Grid.Row="1">
+            <Button x:Name="credits" Content="" Height="120" Width="288" Canvas.Left="66" Canvas.Top="564" Margin="54,510,0,0" Grid.Row="1" Style="{DynamicResource Style}" HorizontalAlignment="Left" VerticalAlignment="Top">
                 <Button.Background>
                     <ImageBrush ImageSource="pictures/CREDITSBUTTON.gif"/>
                 </Button.Background>
             </Button>
-            <Button x:Name="Start" Content="" HorizontalAlignment="Left" Height="120" Margin="54,170,0,0" VerticalAlignment="Top" Width="288" Click="Start_Click" Grid.Row="1">
+            <Button x:Name="Start" Content="" HorizontalAlignment="Left" Height="120" Margin="54,170,0,0" VerticalAlignment="Top" Width="288" Click="Start_Click" Grid.Row="1" Style="{DynamicResource Style}">
                 <Button.Background>
                     <ImageBrush ImageSource="pictures/PLAYBUTTON.gif"/>
                 </Button.Background>
             </Button>
-            <Button x:Name="Menu" Content="" HorizontalAlignment="Left" Height="120" Margin="350,589,0,0" VerticalAlignment="Top" Width="288" Grid.Row="1" Click="Menu_Click" d:IsHidden="True">
+            <Button x:Name="Menu" Content="" HorizontalAlignment="Left" Height="120" Margin="350,589,0,0" VerticalAlignment="Top" Width="288" Grid.Row="1" Click="Menu_Click" d:IsHidden="True" Style="{DynamicResource Style}">
                 <Button.Background>
                     <ImageBrush ImageSource="pictures/OKBOOMER.gif"/>
                 </Button.Background>
             </Button>
-            <Button x:Name="Options" Content="" HorizontalAlignment="Left" Height="120" Margin="54,340,0,0" VerticalAlignment="Top" Width="288" Click="Options_Click" Grid.Row="1">
+            <Button x:Name="Options" Content="" HorizontalAlignment="Left" Height="120" Margin="54,340,0,0" VerticalAlignment="Top" Width="288" Click="Options_Click" Grid.Row="1" Style="{DynamicResource Style}">
                 <Button.Background>
                     <ImageBrush ImageSource="pictures/OPTIONSBUTTON.gif"/>
                 </Button.Background>
             </Button>
 
-            <Grid x:Name="chart" HorizontalAlignment="Left" Height="676" VerticalAlignment="Top" Width="972" Margin="10,43,0,0" IsHitTestVisible="False" Grid.RowSpan="2" Visibility="Hidden">
+            <Grid x:Name="chart" HorizontalAlignment="Left" Height="750" VerticalAlignment="Top" Width="1000" Margin="-20,0,0,0" IsHitTestVisible="False" Grid.RowSpan="2" Visibility="Hidden">
                 
-                <oxy:Plot Title="{Binding Title}" Margin="24,0,10,48" d:IsHidden="True">
+                <oxy:Plot x:Name="Plot" Title="{Binding Title}" Margin="24,0,10,48" d:IsHidden="True">
+                    <oxy:Plot.Background>
+                        <ImageBrush ImageSource="pictures/gggggggggggggggg.jpg"/>
+                    </oxy:Plot.Background>
+
+                    <oxy:Plot.Axes>
+
+                        <oxy:LinearAxis Position="Bottom" MajorGridlineStyle="Solid" MajorTickSize="4" TicklineColor="Red"  AxislineColor="Orange"   AxislineThickness="10" TickStyle="Inside" />
+                        <oxy:LinearAxis Position="Left"  MajorGridlineStyle="Solid"  MajorTickSize="4" TicklineColor="Red"  AxislineColor="Green" AxislineThickness="100" TickStyle="Inside"  />
+                    </oxy:Plot.Axes>
                     <oxy:Plot.Series>
-                         <oxy:LineSeries ItemsSource="{Binding fastf}"/>
-                         <oxy:LineSeries ItemsSource="{Binding staminaf}"/>
+                         <oxy:LineSeries x:Name="riba1" ItemsSource="{Binding fastf}" Color="Green"/>
+                        <oxy:LineSeries x:Name="riba2" ItemsSource="{Binding staminaf}" Color="Yellow"/>
                          <oxy:LineSeries ItemsSource="{Binding tango}"/>
-                    </oxy:Plot.Series>
+                    </oxy:Plot.Series>                    
                 </oxy:Plot>
 
             </Grid>
         </Grid>
-        <Button x:Name="NextRound" Content="" HorizontalAlignment="Left" Margin="354,277,0,0" VerticalAlignment="Top" Width="288" Click="NextRound_Click1" Height="120">
+        <Button x:Name="NextRound" Content="" HorizontalAlignment="Left" Margin="354,277,0,0" VerticalAlignment="Top" Width="288" Click="NextRound_Click1" Height="120" Style="{DynamicResource Style}">
             <Button.Background>
                 <ImageBrush ImageSource="pictures/NEXT.gif"/>
             </Button.Background>
         </Button>
-        <TextBox x:Name="Fish1" HorizontalAlignment="Left" Height="69" Margin="70,492,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="236" d:IsHidden="True">
+        <TextBox x:Name="Fish1" HorizontalAlignment="Left" Height="69" Margin="70,492,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="236" d:IsHidden="True" FontFamily="Yandex-UI-Icons-Private" FontSize="48" TextAlignment="Center">
             <TextBox.Background>
                 <ImageBrush ImageSource="pictures/TEXTBOX.gif"/>
             </TextBox.Background>
         </TextBox>
-        <TextBox x:Name="Fish2" HorizontalAlignment="Left" Height="69" Margin="375,492,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="236" d:IsHidden="True">
+        <TextBox x:Name="Fish2" HorizontalAlignment="Left" Height="69" Margin="375,492,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="236" d:IsHidden="True" FontFamily="Yandex-UI-Icons-Private" FontSize="48" TextAlignment="Center">
             <TextBox.Background>
                 <ImageBrush ImageSource="pictures/TEXTBOX.gif"/>
             </TextBox.Background>
         </TextBox>
-        <TextBox x:Name="weeeeeed" HorizontalAlignment="Left" Height="69" Margin="680,492,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="236" d:IsHidden="True">
+        <TextBox x:Name="weeeeeed" HorizontalAlignment="Left" Height="69" Margin="680,492,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="236" d:IsHidden="True" FontFamily="Yandex-UI-Icons-Private" FontSize="48" TextAlignment="Center">
             <TextBox.Background>
                 <ImageBrush ImageSource="pictures/TEXTBOX.gif"/>
             </TextBox.Background>

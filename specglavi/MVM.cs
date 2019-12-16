@@ -14,6 +14,7 @@ namespace specglavi
         public IList<DataPoint> fastf { get; private set; }
         public IList<DataPoint> staminaf { get; private set; }
         public IList<DataPoint> tango { get; private set; }
+        public PlotModel plot { get; set; }
 
         public MVM()
         {
@@ -21,27 +22,33 @@ namespace specglavi
             fastf = new List<DataPoint>();
             staminaf = new List<DataPoint>();
             tango = new List<DataPoint>();
+            plot = new PlotModel();
 
-            //XDocument xdoc = XDocument.Load("C:\\Users\\user\\source\\repos\\specglavi\\specglavi\\stats.xml");
-            ////XDocument xdoc = XDocument.Load("C:\\Users\\user\\source\\repos\\specglavi\\specglavi\\stats.xml");
-            //foreach (XElement elem in xdoc.Element("simulation").Elements("Round"))
-            //{
-            //    XAttribute attrName = elem.Attribute("id");
-            //    XElement ffcount = elem.Element("Fast_Fish");
-            //    XElement sfcount = elem.Element("Stamina_Fish");
-            //    double tcount = 10;
-
-            //    if (attrName != null && ffcount != null && sfcount != null)
-            //    {
-            //        DataPoint point1 = new DataPoint(double.Parse(attrName.Value), double.Parse(ffcount.Value));
-            //        DataPoint point2 = new DataPoint(double.Parse(attrName.Value), double.Parse(sfcount.Value));
-            //        DataPoint point3 = new DataPoint(double.Parse(attrName.Value), tcount);
-            //        fastf.Add(point1);
-            //        staminaf.Add(point2);
-            //        tango.Add(point3);
-            //    }
-            //}
         }
 
+        public void data()
+        {
+
+            XDocument xdoc = XDocument.Load("C:\\Users\\user\\source\\repos\\specglavi\\specglavi\\stats.xml");
+            //XDocument xdoc = XDocument.Load("C:\\Users\\user\\source\\repos\\specglavi\\specglavi\\stats.xml");
+            foreach (XElement elem in xdoc.Element("simulation").Elements("Round"))
+            {
+                XAttribute attrName = elem.Attribute("id");
+                XElement ffcount = elem.Element("Fast_Fish");
+                XElement sfcount = elem.Element("Stamina_Fish");
+                double tcount = 10;
+
+                if (attrName != null && ffcount != null && sfcount != null)
+                {
+                    DataPoint point1 = new DataPoint(double.Parse(attrName.Value), double.Parse(ffcount.Value));
+                    DataPoint point2 = new DataPoint(double.Parse(attrName.Value), double.Parse(sfcount.Value));
+                    DataPoint point3 = new DataPoint(double.Parse(attrName.Value), tcount);
+                    fastf.Add(point1);
+                    staminaf.Add(point2);
+                    tango.Add(point3);
+                    plot.InvalidatePlot(true);
+                }
+            }
+        }
     }
 }

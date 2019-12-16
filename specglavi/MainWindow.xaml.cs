@@ -38,10 +38,13 @@ namespace Fish_ocean
         bool normal = true;
         ImageBrush ib = new ImageBrush();
 
+        XmlDocument xDoc = new XmlDocument();
+        MVM aga = new MVM();
+
         public MainWindow()
         {
-            InitializeComponent();            
-
+            InitializeComponent();
+            aga = (MVM)DataContext;
             //ib.AlignmentX = AlignmentX.Left;
             //ib.Stretch = Stretch.None;
             //ib.ViewboxUnits = BrushMappingMode.Absolute;
@@ -191,6 +194,30 @@ namespace Fish_ocean
                 fish_spawn(fast, stamina);
                 tango_spawn(tango);
 
+                xDoc.Load("C:\\Users\\user\\source\\repos\\specglavi\\specglavi\\stats.xml");
+                // xDoc.Load("C:\\Users\\user\\source\\repos\\specglavi\\specglavi\\stats.xml");
+                XmlElement xRoot = xDoc.DocumentElement;
+                XmlElement OptionsElem = xDoc.CreateElement("Round");
+                XmlAttribute numAttr = xDoc.CreateAttribute("id");
+
+                XmlElement CYF = xDoc.CreateElement("Fast_Fish");
+                XmlElement CPF = xDoc.CreateElement("Stamina_Fish");
+
+                XmlText roundNum = xDoc.CreateTextNode(round.ToString());
+                XmlText CYFn = xDoc.CreateTextNode(fastfish.Count().ToString());
+                XmlText CPFn = xDoc.CreateTextNode(staminafish.Count().ToString());
+
+                //Creating nodes
+                numAttr.AppendChild(roundNum);
+                CYF.AppendChild(CYFn);
+                CPF.AppendChild(CPFn);
+                OptionsElem.Attributes.Append(numAttr);
+                OptionsElem.AppendChild(CYF);
+                OptionsElem.AppendChild(CPF);
+                xRoot.AppendChild(OptionsElem);
+                //xDoc.Save("C:\\Users\\user\\source\\repos\\specglavi\\specglavi\\stats.xml");
+                xDoc.Save("C:\\Users\\user\\source\\repos\\specglavi\\specglavi\\stats.xml");
+
             }
             else
             {
@@ -316,6 +343,7 @@ namespace Fish_ocean
 
         private void Window_Closed(object sender, EventArgs e)
         {
+
         }
 
         private void Options_Click(object sender, RoutedEventArgs e)
@@ -857,7 +885,6 @@ namespace Fish_ocean
                     StaminaRibki.Stop();
                     Poihali.Stop();
 
-                XmlDocument xDoc = new XmlDocument();
                 xDoc.Load("C:\\Users\\user\\source\\repos\\specglavi\\specglavi\\stats.xml");
                 // xDoc.Load("C:\\Users\\user\\source\\repos\\specglavi\\specglavi\\stats.xml");
                 XmlElement xRoot = xDoc.DocumentElement;
@@ -885,40 +912,44 @@ namespace Fish_ocean
                 Rounding.Stop();
                 NextRound.Visibility = Visibility.Visible;
 
-                if (round == 3)
+                if (round == 5)
                 {
                     //painting();
                     //MVM();
                     //add_point();
-                    Plot.InvalidatePlot(true);
+                    Application.Current.Dispatcher.Invoke(() =>
+                    {
+                        Plot.InvalidatePlot(true);
+                    });
+                    aga.data();
                     chart.Visibility = Visibility.Visible;
                     NextRound.Visibility = Visibility.Hidden;
                 }
             }
         }
 
-        private void create_chart()
-        {
-            var minValue = DateTimeAxis.ToDouble(DateTime.Now.AddDays(-1));
-            var maxValue = DateTimeAxis.ToDouble(DateTime.Now);
-            model.Axes.Add(new DateTimeAxis { Position = AxisPosition.Bottom, Minimum = minValue, Maximum = maxValue, StringFormat = "HH:mm" });
-            var leftAxisY = new LinearAxis { Position = AxisPosition.Left };
-            model.Axes.Add(leftAxisY);
+        //private void create_chart()
+        //{
+        //    var minValue = DateTimeAxis.ToDouble(DateTime.Now.AddDays(-1));
+        //    var maxValue = DateTimeAxis.ToDouble(DateTime.Now);
+        //    model.Axes.Add(new DateTimeAxis { Position = AxisPosition.Bottom, Minimum = minValue, Maximum = maxValue, StringFormat = "HH:mm" });
+        //    var leftAxisY = new LinearAxis { Position = AxisPosition.Left };
+        //    model.Axes.Add(leftAxisY);
 
-            var lineSeries = new LineSeries
-            {
-                Title = "Линейный график",
-                StrokeThickness = 3,
-                LineStyle = LineStyle.Automatic,
-                MarkerType = MarkerType.Circle,
-                MarkerSize = 5,
-                MarkerStroke = OxyColors.White,
-                MarkerFill = OxyColors.Automatic,
-                MarkerStrokeThickness = 1.5,
-            };
-            model.Series.Add(lineSeries);
-            return model;
-        }
+        //    var lineSeries = new LineSeries
+        //    {
+        //        Title = "Линейный график",
+        //        StrokeThickness = 3,
+        //        LineStyle = LineStyle.Automatic,
+        //        MarkerType = MarkerType.Circle,
+        //        MarkerSize = 5,
+        //        MarkerStroke = OxyColors.White,
+        //        MarkerFill = OxyColors.Automatic,
+        //        MarkerStrokeThickness = 1.5,
+        //    };
+        //    model.Series.Add(lineSeries);
+        //    return model;
+        //}
 
         private void add_point()
         {

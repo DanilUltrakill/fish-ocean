@@ -1,7 +1,27 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <simulation>
+  <Round id="0">
+    <Fast_Fish>15</Fast_Fish>
+    <Stamina_Fish>15</Stamina_Fish>
+  </Round>
   <Round id="1">
-    <Fast_Fish>6</Fast_Fish>
-    <Stamina_Fish>0</Stamina_Fish>
+    <Fast_Fish>15</Fast_Fish>
+    <Stamina_Fish>15</Stamina_Fish>
+  </Round>
+  <Round id="2">
+    <Fast_Fish>5</Fast_Fish>
+    <Stamina_Fish>5</Stamina_Fish>
+  </Round>
+  <Round id="3">
+    <Fast_Fish>5</Fast_Fish>
+    <Stamina_Fish>3</Stamina_Fish>
+  </Round>
+  <Round id="4">
+    <Fast_Fish>5</Fast_Fish>
+    <Stamina_Fish>3</Stamina_Fish>
+  </Round>
+  <Round id="5">
+    <Fast_Fish>5</Fast_Fish>
+    <Stamina_Fish>2</Stamina_Fish>
   </Round>
 </simulation>

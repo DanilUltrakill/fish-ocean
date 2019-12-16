@@ -110,7 +110,6 @@
             </Button>
 
             <Grid x:Name="chart" HorizontalAlignment="Left" Height="750" VerticalAlignment="Top" Width="1000" Margin="-20,0,0,0" IsHitTestVisible="False" Grid.RowSpan="2" Visibility="Hidden">
-                
                 <oxy:Plot x:Name="Plot" Title="{Binding Title}" Margin="24,0,10,48" d:IsHidden="True">
                     <oxy:Plot.Background>
                         <ImageBrush ImageSource="pictures/gggggggggggggggg.jpg"/>
@@ -118,16 +117,15 @@
 
                     <oxy:Plot.Axes>
 
-                        <oxy:LinearAxis Position="Bottom" MajorGridlineStyle="Solid" MajorTickSize="4" TicklineColor="Red"  AxislineColor="Orange"   AxislineThickness="10" TickStyle="Inside" />
-                        <oxy:LinearAxis Position="Left"  MajorGridlineStyle="Solid"  MajorTickSize="4" TicklineColor="Red"  AxislineColor="Green" AxislineThickness="100" TickStyle="Inside"  />
+                        <oxy:LinearAxis Position="Bottom" MajorGridlineStyle="Solid" MajorTickSize="4" TicklineColor="Red"  AxislineColor="Orange"   AxislineThickness="10" TickStyle="Inside" MajorStep="1" AbsoluteMaximum="5"/>
+                        <oxy:LinearAxis Position="Left"  MajorGridlineStyle="Solid"  MajorTickSize="4" TicklineColor="Red"  AxislineColor="Green" AxislineThickness="100" TickStyle="Inside" MajorStep="2" AbsoluteMaximum="10" />
                     </oxy:Plot.Axes>
                     <oxy:Plot.Series>
-                         <oxy:LineSeries x:Name="riba1" ItemsSource="{Binding fastf}" Color="Green"/>
-                        <oxy:LineSeries x:Name="riba2" ItemsSource="{Binding staminaf}" Color="Yellow"/>
-                         <oxy:LineSeries ItemsSource="{Binding tango}"/>
-                    </oxy:Plot.Series>                    
+                        <oxy:LineSeries x:Name="riba1" ItemsSource="{Binding fastf}" Color="Firebrick" Title="Fastf" MarkerStroke="SeaGreen" MarkerType="Circle" MarkerFill="LightGreen" MarkerSize="5" MarkerResolution="3"/>
+                        <oxy:LineSeries x:Name="riba2" ItemsSource="{Binding staminaf}" Color="Gold" Title="Staminaf"   MarkerStroke="AliceBlue" MarkerType="Triangle" MarkerFill="Yellow" MarkerSize="5" MarkerResolution="3"/>
+                        <oxy:LineSeries ItemsSource="{Binding tango}" Color="Red"/>
+                    </oxy:Plot.Series>
                 </oxy:Plot>
-
             </Grid>
         </Grid>
         <Button x:Name="NextRound" Content="" HorizontalAlignment="Left" Margin="354,277,0,0" VerticalAlignment="Top" Width="288" Click="NextRound_Click1" Height="120" Style="{DynamicResource Style}">

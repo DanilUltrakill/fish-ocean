@@ -219,7 +219,7 @@ namespace Fish_ocean
                     {
                         foreach (fastf ff in fastfish)
                         {
-                            while (ff.pregnant > 1)
+                            if (ff.pregnant > 1)
                             {
                                 foreach (fastf af in fastfish)
                                 {
@@ -899,9 +899,25 @@ namespace Fish_ocean
 
         private void create_chart()
         {
-            var model = new PlotModel { Title = "Fish Ocean" };
-            model.Axes.Add(new LinearAxis { Position = AxisPosition.Bottom, Minimum = -20, Maximum = 80 });
-            model.Axes.Add(new LinearAxis { Position = AxisPosition.Left, Minimum = -10, Maximum = 10 });
+            var minValue = DateTimeAxis.ToDouble(DateTime.Now.AddDays(-1));
+            var maxValue = DateTimeAxis.ToDouble(DateTime.Now);
+            model.Axes.Add(new DateTimeAxis { Position = AxisPosition.Bottom, Minimum = minValue, Maximum = maxValue, StringFormat = "HH:mm" });
+            var leftAxisY = new LinearAxis { Position = AxisPosition.Left };
+            model.Axes.Add(leftAxisY);
+
+            var lineSeries = new LineSeries
+            {
+                Title = "Линейный график",
+                StrokeThickness = 3,
+                LineStyle = LineStyle.Automatic,
+                MarkerType = MarkerType.Circle,
+                MarkerSize = 5,
+                MarkerStroke = OxyColors.White,
+                MarkerFill = OxyColors.Automatic,
+                MarkerStrokeThickness = 1.5,
+            };
+            model.Series.Add(lineSeries);
+            return model;
         }
 
         private void add_point()

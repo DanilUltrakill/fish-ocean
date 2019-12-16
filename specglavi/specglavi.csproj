@@ -166,5 +166,11 @@
   <ItemGroup>
     <Resource Include="pictures\gggggggggggggggg.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="pictures\FAST_AND_FURIOUScombo.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="pictures\roflanRibalocombo.gif" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

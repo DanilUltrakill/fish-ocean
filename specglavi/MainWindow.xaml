@@ -121,8 +121,8 @@
                         <oxy:LinearAxis Position="Left"  MajorGridlineStyle="Solid"  MajorTickSize="4" TicklineColor="Red"  AxislineColor="Green" AxislineThickness="100" TickStyle="Inside" MajorStep="2" AbsoluteMaximum="10" />
                     </oxy:Plot.Axes>
                     <oxy:Plot.Series>
-                        <oxy:LineSeries x:Name="riba1" ItemsSource="{Binding fastf}" Color="Firebrick" Title="Fastf" MarkerStroke="SeaGreen" MarkerType="Circle" MarkerFill="LightGreen" MarkerSize="5" MarkerResolution="3"/>
-                        <oxy:LineSeries x:Name="riba2" ItemsSource="{Binding staminaf}" Color="Gold" Title="Staminaf"   MarkerStroke="AliceBlue" MarkerType="Triangle" MarkerFill="Yellow" MarkerSize="5" MarkerResolution="3"/>
+                        <oxy:LineSeries x:Name="riba1" ItemsSource="{Binding fastf}" Color="Firebrick" Title="Fastf" MarkerStroke="Firebrick" MarkerType="Circle" MarkerFill="Firebrick" MarkerSize="5" MarkerResolution="3"/>
+                        <oxy:LineSeries x:Name="riba2" ItemsSource="{Binding staminaf}" Color="Gold" Title="Staminaf"   MarkerStroke="Gold" MarkerType="Triangle" MarkerFill="Gold" MarkerSize="5" MarkerResolution="3"/>
                         <oxy:LineSeries ItemsSource="{Binding tango}" Color="Red"/>
                     </oxy:Plot.Series>
                 </oxy:Plot>

@@ -317,19 +317,19 @@ namespace Fish_ocean
 
             Rounding = new System.Windows.Threading.DispatcherTimer();
             Rounding.Tick += new EventHandler(Rounding_Tick);
-            Rounding.Interval = new TimeSpan(0, 0, 0, 0, 400);
+            Rounding.Interval = new TimeSpan(0, 0, 0, 0, 8);
 
             FastRibki = new System.Windows.Threading.DispatcherTimer();
             FastRibki.Tick += new EventHandler(FastRibki_Tick);
-            FastRibki.Interval = new TimeSpan(0, 0, 0, 0, 400);
+            FastRibki.Interval = new TimeSpan(0, 0, 0, 0, 8);
 
             StaminaRibki = new System.Windows.Threading.DispatcherTimer();
             StaminaRibki.Tick += new EventHandler(StaminaRibki_Tick);
-            StaminaRibki.Interval = new TimeSpan(0, 0, 0, 0, 800);
+            StaminaRibki.Interval = new TimeSpan(0, 0, 0, 0, 16);
 
             Poihali = new System.Windows.Threading.DispatcherTimer();
             Poihali.Tick += new EventHandler(Poihali_Tick);
-            Poihali.Interval = new TimeSpan(0, 0, 0, 0, 400);
+            Poihali.Interval = new TimeSpan(0, 0, 0, 0, 8);
 
             Rounding.Start();
             if (normal == true)
@@ -408,7 +408,7 @@ namespace Fish_ocean
                     {
                         if (ff.fx != tx)
                         {
-                            ff.fx += 50;
+                            ff.fx += 1;
                         }
                     }
 
@@ -416,7 +416,7 @@ namespace Fish_ocean
                     {
                         if (ff.fx != tx)
                         {
-                            ff.fx -= 50;
+                            ff.fx -= 1;
                         }
                     }
                 }
@@ -427,7 +427,7 @@ namespace Fish_ocean
                     {
                         if (ff.fy != ty)
                         {
-                            ff.fy += 50;
+                            ff.fy += 1;
                         }
                     }
 
@@ -435,7 +435,7 @@ namespace Fish_ocean
                     {
                         if (ff.fy != ty)
                         {
-                            ff.fy -= 50;
+                            ff.fy -= 1;
                         }
                     }
                 }
@@ -448,13 +448,13 @@ namespace Fish_ocean
                         {
                             if (ff.fx != (tx - ty + ff.fy))
                             {
-                                ff.fx += 50;
+                                ff.fx += 1;
                             }
 
                             if ((ff.fx == (tx - ty + ff.fy)) && ff.fx != tx)
                             {
-                                ff.fx += 50;
-                                ff.fy += 50;
+                                ff.fx += 1;
+                                ff.fy += 1;
                             }
                         }
 
@@ -462,21 +462,21 @@ namespace Fish_ocean
                         {
                             if (ff.fy != (ff.fx - tx + ty))
                             {
-                                ff.fy += 50;
+                                ff.fy += 1;
                             }
 
                             if ((ff.fy != (ff.fx - tx + ty)) && ff.fy != ty)
                             {
-                                ff.fx += 50;
-                                ff.fy += 50;
+                                ff.fx += 1;
+                                ff.fy += 1;
                             }
                         }
                         if (ff.fx - ff.fy == tx - ty)//rddiag
                         {
                             if (ff.fy != ty)
                             {
-                                ff.fx += 50;
-                                ff.fy += 50;
+                                ff.fx += 1;
+                                ff.fy += 1;
                             }
                         }
                     }
@@ -489,13 +489,13 @@ namespace Fish_ocean
                         {
                             if (ff.fx + ff.fy != (tx + ty - ff.fy))
                             {
-                                ff.fx += 50;
+                                ff.fx += 1;
                             }
 
                             if ((ff.fx + ff.fy == (tx + ty - ff.fy)) && ff.fx != tx)
                             {
-                                ff.fx += 50;
-                                ff.fy -= 50;
+                                ff.fx += 1;
+                                ff.fy -= 1;
                             }
                         }
 
@@ -503,21 +503,21 @@ namespace Fish_ocean
                         {
                             if (ff.fx + ff.fy != (tx + ty - ff.fx))
                             {
-                                ff.fy -= 50;
+                                ff.fy -= 1;
                             }
 
                             if ((ff.fx + ff.fy == (tx + ty - ff.fx)) && ff.fy != ty)
                             {
-                                ff.fx += 50;
-                                ff.fy -= 50;
+                                ff.fx += 1;
+                                ff.fy -= 1;
                             }
                         }
-                        if (Math.Sqrt(Math.Pow(ff.fx + ff.fy, 2)) == Math.Sqrt(Math.Pow(tx + ty, 2)))//rdiag
+                        if (Math.Sqrt(Math.Pow(ff.fx + ff.fy, 2)) == Math.Sqrt(Math.Pow(tx + ty, 2)))//rudiag
                         {
                             if (ff.fy != ty)
                             {
-                                ff.fx += 50;
-                                ff.fy -= 50;
+                                ff.fx += 1;
+                                ff.fy -= 1;
                             }
                         }
                     }
@@ -533,13 +533,13 @@ namespace Fish_ocean
                         {
                             if (ff.fx + ff.fy != (tx + ty - ff.fy))
                             {
-                                ff.fx -= 50;
+                                ff.fx -= 1;
                             }
 
                             if ((ff.fx + ff.fy == (tx + ty - ff.fy)) && ff.fx != tx)
                             {
-                                ff.fx -= 50;
-                                ff.fy += 50;
+                                ff.fx -= 1;
+                                ff.fy += 1;
                             }
                         }
 
@@ -547,21 +547,21 @@ namespace Fish_ocean
                         {
                             if (ff.fx + ff.fy != (tx + ty - ff.fx))
                             {
-                                ff.fy += 50;
+                                ff.fy += 1;
                             }
 
                             if ((ff.fx + ff.fy == (tx + ty - ff.fx)) && ff.fy != ty)
                             {
-                                ff.fx -= 50;
-                                ff.fy += 50;
+                                ff.fx -= 1;
+                                ff.fy += 1;
                             }
                         }
                         if (ff.fx + ff.fy == tx + ty)//ldiag
                         {
                             if (ff.fy != ty)
                             {
-                                ff.fx -= 50;
-                                ff.fy += 50;
+                                ff.fx -= 1;
+                                ff.fy += 1;
                             }
                         }
                     }
@@ -574,13 +574,13 @@ namespace Fish_ocean
                         {
                             if (ff.fx != (tx - ty + ff.fy))
                             {
-                                ff.fx -= 50;
+                                ff.fx -= 1;
                             }
 
                             if ((ff.fx == (tx - ty + ff.fy)) && ff.fx != tx)
                             {
-                                ff.fx -= 50;
-                                ff.fy -= 50;
+                                ff.fx -= 1;
+                                ff.fy -= 1;
                             }
                         }
 
@@ -588,21 +588,21 @@ namespace Fish_ocean
                         {
                             if (ff.fx != (tx - ty + ff.fy))
                             {
-                                ff.fy -= 50;
+                                ff.fy -= 1;
                             }
 
-                            if ((ff.fx == (tx - ty + ff.fy)) && ff.fy != ty)
+                            if ((ff.fy != (ff.fx - tx + ty)) && ff.fy != ty)
                             {
-                                ff.fx -= 50;
-                                ff.fy -= 50;
+                                ff.fx -= 1;
+                                ff.fy -= 1;
                             }
                         }
                         if (ff.fx - ff.fy == tx - ty)//rddiag
                         {
                             if (ff.fy != ty)
                             {
-                                ff.fx -= 50;
-                                ff.fy -= 50;
+                                ff.fx -= 1;
+                                ff.fy -= 1;
                             }
                         }
                     }
@@ -664,7 +664,7 @@ namespace Fish_ocean
                     {
                         if (sf.fx != tx)
                         {
-                            sf.fx += 50;
+                            sf.fx += 1;
                         }
                     }
 
@@ -672,7 +672,7 @@ namespace Fish_ocean
                     {
                         if (sf.fx != tx)
                         {
-                            sf.fx -= 50;
+                            sf.fx -= 1;
                         }
                     }
                 }
@@ -683,7 +683,7 @@ namespace Fish_ocean
                     {
                         if (sf.fy != ty)
                         {
-                            sf.fy += 50;
+                            sf.fy += 1;
                         }
                     }
 
@@ -691,7 +691,7 @@ namespace Fish_ocean
                     {
                         if (sf.fy != ty)
                         {
-                            sf.fy -= 50;
+                            sf.fy -= 1;
                         }
                     }
                 }
@@ -704,13 +704,13 @@ namespace Fish_ocean
                         {
                             if (sf.fx != (tx - ty))
                             {
-                                sf.fx += 50;
+                                sf.fx += 1;
                             }
 
                             if ((sf.fx == (tx - ty)) && sf.fx != tx)
                             {
-                                sf.fx += 50;
-                                sf.fy += 50;
+                                sf.fx += 1;
+                                sf.fy += 1;
                             }
                         }
 
@@ -718,21 +718,21 @@ namespace Fish_ocean
                         {
                             if (sf.fy != (ty - tx))
                             {
-                                sf.fy += 50;
+                                sf.fy += 1;
                             }
 
                             if ((sf.fy == (ty - tx)) && sf.fy != ty)
                             {
-                                sf.fx += 50;
-                                sf.fy += 50;
+                                sf.fx += 1;
+                                sf.fy += 1;
                             }
                         }
                         if (sf.fx - sf.fy == tx - ty)//rddiag
                         {
                             if (sf.fy != ty)
                             {
-                                sf.fx += 50;
-                                sf.fy += 50;
+                                sf.fx += 1;
+                                sf.fy += 1;
                             }
                         }
                     }
@@ -745,13 +745,13 @@ namespace Fish_ocean
                         {
                             if (sf.fx + sf.fy != (tx - ty))
                             {
-                                sf.fx += 50;
+                                sf.fx += 1;
                             }
 
                             if ((sf.fx + sf.fy == (tx - ty)) && sf.fx != tx)
                             {
-                                sf.fx += 50;
-                                sf.fy -= 50;
+                                sf.fx += 1;
+                                sf.fy -= 1;
                             }
                         }
 
@@ -759,21 +759,21 @@ namespace Fish_ocean
                         {
                             if (sf.fx + sf.fy != (ty - tx))
                             {
-                                sf.fy -= 50;
+                                sf.fy -= 1;
                             }
 
                             if ((sf.fx + sf.fy == (ty - tx)) && sf.fy != ty)
                             {
-                                sf.fx += 50;
-                                sf.fy -= 50;
+                                sf.fx += 1;
+                                sf.fy -= 1;
                             }
                         }
                         if (Math.Sqrt(Math.Pow(sf.fx + sf.fy, 2)) == Math.Sqrt(Math.Pow(tx + ty, 2)))//rdiag
                         {
                             if (sf.fy != ty)
                             {
-                                sf.fx += 50;
-                                sf.fy -= 50;
+                                sf.fx += 1;
+                                sf.fy -= 1;
                             }
                         }
                     }
@@ -789,13 +789,13 @@ namespace Fish_ocean
                         {
                             if (sf.fx + sf.fy != tx + ty)
                             {
-                                sf.fx -= 50;
+                                sf.fx -= 1;
                             }
 
                             if ((sf.fx + sf.fy == tx + ty) && sf.fx != tx)
                             {
-                                sf.fx -= 50;
-                                sf.fy += 50;
+                                sf.fx -= 1;
+                                sf.fy += 1;
                             }
                         }
 
@@ -803,21 +803,21 @@ namespace Fish_ocean
                         {
                             if (sf.fx + sf.fy != ty + tx)
                             {
-                                sf.fy += 50;
+                                sf.fy += 1;
                             }
 
                             if ((sf.fx + sf.fy == ty + tx) && sf.fy != ty)
                             {
-                                sf.fx -= 50;
-                                sf.fy += 50;
+                                sf.fx -= 1;
+                                sf.fy += 1;
                             }
                         }
                         if (sf.fx + sf.fy == tx + ty)//ldiag
                         {
                             if (sf.fy != ty)
                             {
-                                sf.fx -= 50;
-                                sf.fy += 50;
+                                sf.fx -= 1;
+                                sf.fy += 1;
                             }
                         }
                     }
@@ -830,13 +830,13 @@ namespace Fish_ocean
                         {
                             if (sf.fx != (ty - tx))
                             {
-                                sf.fx -= 50;
+                                sf.fx -= 1;
                             }
 
                             if ((sf.fx == (ty - tx)) && sf.fx != tx)
                             {
-                                sf.fx -= 50;
-                                sf.fy -= 50;
+                                sf.fx -= 1;
+                                sf.fy -= 1;
                             }
                         }
 
@@ -844,13 +844,13 @@ namespace Fish_ocean
                         {
                             if (sf.fy != (tx - ty + sf.fy))
                             {
-                                sf.fy -= 50;
+                                sf.fy -= 1;
                             }
 
                             if ((sf.fy != (tx - ty + sf.fy)) && sf.fy != ty)
                             {
-                                sf.fx -= 50;
-                                sf.fy -= 50;
+                                sf.fx -= 1;
+                                sf.fy -= 1;
                             }
                         }
 
@@ -858,8 +858,8 @@ namespace Fish_ocean
                         {
                             if (sf.fy != ty)
                             {
-                                sf.fx -= 50;
-                                sf.fy -= 50;
+                                sf.fx -= 1;
+                                sf.fy -= 1;
                             }
                         }
                     }
@@ -1069,7 +1069,7 @@ namespace Fish_ocean
                     {
                         if (ff.fx != tx)
                         {
-                            ff.fx += 50;
+                            ff.fx += 1;
                         }
                     }
 
@@ -1077,7 +1077,7 @@ namespace Fish_ocean
                     {
                         if (ff.fx != tx)
                         {
-                            ff.fx -= 50;
+                            ff.fx -= 1;
                         }
                     }
                 }
@@ -1088,7 +1088,7 @@ namespace Fish_ocean
                     {
                         if (ff.fy != ty)
                         {
-                            ff.fy += 50;
+                            ff.fy += 1;
                         }
                     }
 
@@ -1096,7 +1096,7 @@ namespace Fish_ocean
                     {
                         if (ff.fy != ty)
                         {
-                            ff.fy -= 50;
+                            ff.fy -= 1;
                         }
                     }
                 }
@@ -1109,13 +1109,13 @@ namespace Fish_ocean
                         {
                             if (ff.fx != (tx - ty + ff.fy))
                             {
-                                ff.fx += 50;
+                                ff.fx += 1;
                             }
 
                             if ((ff.fx == (tx - ty + ff.fy)) && ff.fx != tx)
                             {
-                                ff.fx += 50;
-                                ff.fy += 50;
+                                ff.fx += 1;
+                                ff.fy += 1;
                             }
                         }
 
@@ -1123,21 +1123,21 @@ namespace Fish_ocean
                         {
                             if (ff.fy != (ff.fx - tx + ty))
                             {
-                                ff.fy += 50;
+                                ff.fy += 1;
                             }
 
                             if ((ff.fy != (ff.fx - tx + ty)) && ff.fy != ty)
                             {
-                                ff.fx += 50;
-                                ff.fy += 50;
+                                ff.fx += 1;
+                                ff.fy += 1;
                             }
                         }
                         if (ff.fx - ff.fy == tx - ty)//rddiag
                         {
                             if (ff.fy != ty)
                             {
-                                ff.fx += 50;
-                                ff.fy += 50;
+                                ff.fx += 1;
+                                ff.fy += 1;
                             }
                         }
                     }
@@ -1150,13 +1150,13 @@ namespace Fish_ocean
                         {
                             if (ff.fx + ff.fy != (tx + ty - ff.fy))
                             {
-                                ff.fx += 50;
+                                ff.fx += 1;
                             }
 
                             if ((ff.fx + ff.fy == (tx + ty - ff.fy)) && ff.fx != tx)
                             {
-                                ff.fx += 50;
-                                ff.fy -= 50;
+                                ff.fx += 1;
+                                ff.fy -= 1;
                             }
                         }
 
@@ -1164,21 +1164,21 @@ namespace Fish_ocean
                         {
                             if (ff.fx + ff.fy != (tx + ty - ff.fx))
                             {
-                                ff.fy -= 50;
+                                ff.fy -= 1;
                             }
 
                             if ((ff.fx + ff.fy == (tx + ty - ff.fx)) && ff.fy != ty)
                             {
-                                ff.fx += 50;
-                                ff.fy -= 50;
+                                ff.fx += 1;
+                                ff.fy -= 1;
                             }
                         }
-                        if (Math.Sqrt(Math.Pow(ff.fx + ff.fy, 2)) == Math.Sqrt(Math.Pow(tx + ty, 2)))//rdiag
+                        if (Math.Sqrt(Math.Pow(ff.fx + ff.fy, 2)) == Math.Sqrt(Math.Pow(tx + ty, 2)))//rudiag
                         {
                             if (ff.fy != ty)
                             {
-                                ff.fx += 50;
-                                ff.fy -= 50;
+                                ff.fx += 1;
+                                ff.fy -= 1;
                             }
                         }
                     }
@@ -1194,13 +1194,13 @@ namespace Fish_ocean
                         {
                             if (ff.fx + ff.fy != (tx + ty - ff.fy))
                             {
-                                ff.fx -= 50;
+                                ff.fx -= 1;
                             }
 
                             if ((ff.fx + ff.fy == (tx + ty - ff.fy)) && ff.fx != tx)
                             {
-                                ff.fx -= 50;
-                                ff.fy += 50;
+                                ff.fx -= 1;
+                                ff.fy += 1;
                             }
                         }
 
@@ -1208,21 +1208,21 @@ namespace Fish_ocean
                         {
                             if (ff.fx + ff.fy != (tx + ty - ff.fx))
                             {
-                                ff.fy += 50;
+                                ff.fy += 1;
                             }
 
                             if ((ff.fx + ff.fy == (tx + ty - ff.fx)) && ff.fy != ty)
                             {
-                                ff.fx -= 50;
-                                ff.fy += 50;
+                                ff.fx -= 1;
+                                ff.fy += 1;
                             }
                         }
                         if (ff.fx + ff.fy == tx + ty)//ldiag
                         {
                             if (ff.fy != ty)
                             {
-                                ff.fx -= 50;
-                                ff.fy += 50;
+                                ff.fx -= 1;
+                                ff.fy += 1;
                             }
                         }
                     }
@@ -1235,13 +1235,13 @@ namespace Fish_ocean
                         {
                             if (ff.fx != (tx - ty + ff.fy))
                             {
-                                ff.fx -= 50;
+                                ff.fx -= 1;
                             }
 
                             if ((ff.fx == (tx - ty + ff.fy)) && ff.fx != tx)
                             {
-                                ff.fx -= 50;
-                                ff.fy -= 50;
+                                ff.fx -= 1;
+                                ff.fy -= 1;
                             }
                         }
 
@@ -1249,21 +1249,21 @@ namespace Fish_ocean
                         {
                             if (ff.fx != (tx - ty + ff.fy))
                             {
-                                ff.fy -= 50;
+                                ff.fy -= 1;
                             }
 
-                            if ((ff.fx == (tx - ty + ff.fy)) && ff.fy != ty)
+                            if ((ff.fy != (ff.fx - tx + ty)) && ff.fy != ty)
                             {
-                                ff.fx -= 50;
-                                ff.fy -= 50;
+                                ff.fx -= 1;
+                                ff.fy -= 1;
                             }
                         }
                         if (ff.fx - ff.fy == tx - ty)//rddiag
                         {
                             if (ff.fy != ty)
                             {
-                                ff.fx -= 50;
-                                ff.fy -= 50;
+                                ff.fx -= 1;
+                                ff.fy -= 1;
                             }
                         }
                     }
@@ -1334,7 +1334,7 @@ namespace Fish_ocean
                     {
                         if (sf.fx != tx)
                         {
-                            sf.fx += 50;
+                            sf.fx += 1;
                         }
                     }
 
@@ -1342,7 +1342,7 @@ namespace Fish_ocean
                     {
                         if (sf.fx != tx)
                         {
-                            sf.fx -= 50;
+                            sf.fx -= 1;
                         }
                     }
                 }
@@ -1353,7 +1353,7 @@ namespace Fish_ocean
                     {
                         if (sf.fy != ty)
                         {
-                            sf.fy += 50;
+                            sf.fy += 1;
                         }
                     }
 
@@ -1361,7 +1361,7 @@ namespace Fish_ocean
                     {
                         if (sf.fy != ty)
                         {
-                            sf.fy -= 50;
+                            sf.fy -= 1;
                         }
                     }
                 }
@@ -1374,13 +1374,13 @@ namespace Fish_ocean
                         {
                             if (sf.fx != (tx - ty))
                             {
-                                sf.fx += 50;
+                                sf.fx += 1;
                             }
 
                             if ((sf.fx == (tx - ty)) && sf.fx != tx)
                             {
-                                sf.fx += 50;
-                                sf.fy += 50;
+                                sf.fx += 1;
+                                sf.fy += 1;
                             }
                         }
 
@@ -1388,21 +1388,21 @@ namespace Fish_ocean
                         {
                             if (sf.fy != (ty - tx))
                             {
-                                sf.fy += 50;
+                                sf.fy += 1;
                             }
 
                             if ((sf.fy == (ty - tx)) && sf.fy != ty)
                             {
-                                sf.fx += 50;
-                                sf.fy += 50;
+                                sf.fx += 1;
+                                sf.fy += 1;
                             }
                         }
                         if (sf.fx - sf.fy == tx - ty)//rddiag
                         {
                             if (sf.fy != ty)
                             {
-                                sf.fx += 50;
-                                sf.fy += 50;
+                                sf.fx += 1;
+                                sf.fy += 1;
                             }
                         }
                     }
@@ -1415,13 +1415,13 @@ namespace Fish_ocean
                         {
                             if (sf.fx + sf.fy != (tx - ty))
                             {
-                                sf.fx += 50;
+                                sf.fx += 1;
                             }
 
                             if ((sf.fx + sf.fy == (tx - ty)) && sf.fx != tx)
                             {
-                                sf.fx += 50;
-                                sf.fy -= 50;
+                                sf.fx += 1;
+                                sf.fy -= 1;
                             }
                         }
 
@@ -1429,21 +1429,21 @@ namespace Fish_ocean
                         {
                             if (sf.fx + sf.fy != (ty - tx))
                             {
-                                sf.fy -= 50;
+                                sf.fy -= 1;
                             }
 
                             if ((sf.fx + sf.fy == (ty - tx)) && sf.fy != ty)
                             {
-                                sf.fx += 50;
-                                sf.fy -= 50;
+                                sf.fx += 1;
+                                sf.fy -= 1;
                             }
                         }
                         if (Math.Sqrt(Math.Pow(sf.fx + sf.fy, 2)) == Math.Sqrt(Math.Pow(tx + ty, 2)))//rdiag
                         {
                             if (sf.fy != ty)
                             {
-                                sf.fx += 50;
-                                sf.fy -= 50;
+                                sf.fx += 1;
+                                sf.fy -= 1;
                             }
                         }
                     }
@@ -1459,13 +1459,13 @@ namespace Fish_ocean
                         {
                             if (sf.fx + sf.fy != tx + ty)
                             {
-                                sf.fx -= 50;
+                                sf.fx -= 1;
                             }
 
                             if ((sf.fx + sf.fy == tx + ty) && sf.fx != tx)
                             {
-                                sf.fx -= 50;
-                                sf.fy += 50;
+                                sf.fx -= 1;
+                                sf.fy += 1;
                             }
                         }
 
@@ -1473,21 +1473,21 @@ namespace Fish_ocean
                         {
                             if (sf.fx + sf.fy != ty + tx)
                             {
-                                sf.fy += 50;
+                                sf.fy += 1;
                             }
 
                             if ((sf.fx + sf.fy == ty + tx) && sf.fy != ty)
                             {
-                                sf.fx -= 50;
-                                sf.fy += 50;
+                                sf.fx -= 1;
+                                sf.fy += 1;
                             }
                         }
                         if (sf.fx + sf.fy == tx + ty)//ldiag
                         {
                             if (sf.fy != ty)
                             {
-                                sf.fx -= 50;
-                                sf.fy += 50;
+                                sf.fx -= 1;
+                                sf.fy += 1;
                             }
                         }
                     }
@@ -1500,13 +1500,13 @@ namespace Fish_ocean
                         {
                             if (sf.fx != (ty - tx))
                             {
-                                sf.fx -= 50;
+                                sf.fx -= 1;
                             }
 
                             if ((sf.fx == (ty - tx)) && sf.fx != tx)
                             {
-                                sf.fx -= 50;
-                                sf.fy -= 50;
+                                sf.fx -= 1;
+                                sf.fy -= 1;
                             }
                         }
 
@@ -1514,13 +1514,13 @@ namespace Fish_ocean
                         {
                             if (sf.fy != (tx - ty + sf.fy))
                             {
-                                sf.fy -= 50;
+                                sf.fy -= 1;
                             }
 
                             if ((sf.fy != (tx - ty + sf.fy)) && sf.fy != ty)
                             {
-                                sf.fx -= 50;
-                                sf.fy -= 50;
+                                sf.fx -= 1;
+                                sf.fy -= 1;
                             }
                         }
 
@@ -1528,8 +1528,8 @@ namespace Fish_ocean
                         {
                             if (sf.fy != ty)
                             {
-                                sf.fx -= 50;
-                                sf.fy -= 50;
+                                sf.fx -= 1;
+                                sf.fy -= 1;
                             }
                         }
                     }
